@@ -1,0 +1,103 @@
+/* ── FOOTER ── */
+footer{background:var(--green-deep);color:#fff;padding:64px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:48px;padding-bottom:36px}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.9;margin:14px 0 20px}
+.footer-logo-mark{background:rgba(255,255,255,.12);border-radius:12px}
+.footer-section h5{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:16px;letter-spacing:.06em}
+.footer-section ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-section ul li a{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;transition:.18s}
+.footer-section ul li a:hover{color:#fff}
+.footer-social{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.f-soc{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.85);text-decoration:none;transition:background .22s ease,color .22s ease,transform .22s ease;border:1px solid rgba(255,255,255,.12)}
+.f-soc:hover{transform:translateY(-2px);color:#fff}
+.f-soc--whatsapp:hover{background:#25d366;border-color:#25d366}
+.f-soc--instagram:hover{background:#e1306c;border-color:#e1306c}
+.f-soc--x:hover{background:#000;border-color:#000}
+.f-soc--mail:hover{background:var(--gold);border-color:var(--gold)}
+
+.footer-contact{display:flex;flex-direction:column;gap:10px}
+.footer-contact__item,.footer-contact__link{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(255,255,255,.55);line-height:1.6}
+.footer-contact__link{text-decoration:none;transition:color .18s ease}
+.footer-contact__link:hover{color:#fff}
+.footer-contact__icon{
+  display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:9px;
+  background:rgba(255,255,255,.08);color:var(--gold);flex-shrink:0;
+}
+
+.footer-copy-btn{
+  display:flex;align-items:center;gap:10px;width:100%;
+  padding:10px 12px;border-radius:12px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  color:#fff;cursor:pointer;font-family:inherit;text-align:right;
+  transition:background .22s ease,border-color .22s ease,transform .22s ease;
+  min-height:0;height:auto;box-sizing:border-box;
+}
+.footer-copy-btn:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.22)}
+.footer-copy-btn:active{transform:scale(.98)}
+.footer-copy-btn.copied{background:rgba(42,138,78,.25);border-color:rgba(42,138,78,.45)}
+.footer-copy-btn__icon{
+  display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:9px;
+  background:rgba(255,255,255,.1);color:var(--gold);flex-shrink:0;
+}
+.footer-copy-btn.copied .footer-copy-btn__icon{background:rgba(42,138,78,.35);color:#fff}
+.footer-copy-btn__text{display:flex;flex-direction:column;gap:2px;min-width:0}
+.footer-copy-btn__value{font-size:13.5px;font-weight:700;line-height:1.3}
+.footer-copy-btn small{font-size:10.5px;color:rgba(255,255,255,.5);font-weight:500}
+.footer-copy-btn.copied small{color:rgba(255,255,255,.8)}
+.footer-iban{margin-top:4px}
+.footer-iban .iban-block__bank{margin-bottom:8px;font-size:11.5px;opacity:.7}
+.footer-iban .iban-block__btn{padding:10px 12px;border-radius:10px}
+.footer-iban .iban-block__value{font-size:clamp(11px,2.8vw,12.5px)}
+
+.footer-location{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 20px;margin-bottom:28px;
+  background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.12),rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.1);border-radius:12px;
+  font-size:13px;font-weight:600;color:rgba(255,255,255,.8);
+}
+.footer-location svg{color:var(--gold);flex-shrink:0}
+
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:20px 0 22px}
+.footer-bottom__inner{display:flex;flex-direction:column;align-items:center;gap:14px}
+.footer-bottom__copy{font-size:12px;color:rgba(255,255,255,.4);text-align:center;line-height:1.7;padding:0 12px}
+
+.footer-regs{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;
+  width:100%;max-width:680px;padding:0 16px;
+}
+.footer-reg{
+  display:inline-flex;align-items:center;gap:10px;
+  margin:0;padding:10px 14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.14);
+  color:#fff;cursor:pointer;font-family:inherit;
+  transition:background .2s ease,border-color .2s ease;
+  flex:1 1 260px;max-width:320px;
+  min-height:auto;height:auto;
+  box-sizing:border-box;
+}
+.footer-reg:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22)}
+.footer-reg.copied{background:rgba(42,138,78,.28);border-color:rgba(42,138,78,.5)}
+.footer-reg svg{color:var(--gold);flex-shrink:0}
+.footer-reg.copied svg{color:#fff}
+.footer-reg__body{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;text-align:right}
+.footer-reg__label{font-size:10.5px;font-weight:600;color:rgba(255,255,255,.55);line-height:1.3}
+.footer-reg__num{font-size:13px;font-weight:800;line-height:1.3;letter-spacing:.03em}
+.footer-reg small{
+  font-size:10px;font-weight:700;color:rgba(255,255,255,.45);
+  background:rgba(255,255,255,.08);padding:4px 8px;border-radius:99px;flex-shrink:0;
+}
+.footer-reg.copied small{color:#fff;background:rgba(255,255,255,.18)}
+
+@media(max-width:768px){
+  .footer-location{margin-bottom:20px;font-size:12px;padding:12px 16px}
+  .footer-bottom{padding:18px 0 96px}
+  .footer-regs{flex-direction:column;padding:0 16px;gap:8px}
+  .footer-reg{
+    width:100%;max-width:100%;flex:none;
+  }
+}

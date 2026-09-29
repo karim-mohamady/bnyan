@@ -1,0 +1,279 @@
+/* ── STATS SECTION ── */
+.stats-section {
+  background: radial-gradient(circle at 80% 20%, rgba(201, 162, 39, 0.04) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(46, 117, 89, 0.12) 0%, transparent 60%),
+              #092618; /* Deep rich forest green background - very easy on the eyes */
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top-Left Islamic Pattern */
+.stats-section::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 380px;
+  height: 380px;
+  z-index: 1;
+  opacity: 0.04;
+  pointer-events: none;
+  background-color: var(--gold);
+  -webkit-mask-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/islamic-geometric-patterns-moorish-architecture-henna-pattern-design-0592fcb0a4faaf73f00a2ee50294929c.png');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/islamic-geometric-patterns-moorish-architecture-henna-pattern-design-0592fcb0a4faaf73f00a2ee50294929c.png');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  animation: statsBgSpin 180s linear infinite;
+}
+
+/* Bottom-Right Islamic Pattern */
+.stats-section::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  right: -80px;
+  width: 380px;
+  height: 380px;
+  z-index: 1;
+  opacity: 0.04;
+  pointer-events: none;
+  background-color: var(--green-light);
+  -webkit-mask-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/islamic-geometric-patterns-moorish-architecture-henna-pattern-design-0592fcb0a4faaf73f00a2ee50294929c.png');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/islamic-geometric-patterns-moorish-architecture-henna-pattern-design-0592fcb0a4faaf73f00a2ee50294929c.png');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  animation: statsBgSpin 180s linear infinite reverse;
+}
+
+@keyframes statsBgSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Split layout */
+.stats-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* 45% / 55% split approx */
+  gap: 60px;
+  align-items: center;
+}
+
+/* Right side content */
+.stats-content {
+  text-align: right;
+  position: relative;
+  z-index: 2;
+}
+.stats-content .eyebrow {
+  color: var(--gold); /* Gold eyebrow on dark */
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.stats-content .eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--gold);
+}
+.stats-content .section-title {
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 900;
+  color: #ffffff; /* White title */
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+.stats-content .section-subtitle {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7); /* Soft light gray text */
+  margin-bottom: 30px;
+  max-width: 95%;
+}
+
+/* Gold button for high contrast CTA on dark green */
+.stats-action .btn-primary {
+  background: var(--gold);
+  color: #fff;
+}
+.stats-action .btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(201, 162, 39, 0.35);
+}
+
+/* Left side cards grid: dynamic staggered layout */
+.stats-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Stat card style: Premium Glassmorphism with Gold Border */
+.stat-card {
+  background: rgba(255, 255, 255, 0.02); /* Frosted glass */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(201, 162, 39, 0.2); /* Subtle Gold border */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s ease, opacity 0.6s ease;
+  
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.stat-card.animate {
+  opacity: 1;
+  transform: translateY(0);
+  animation: pulseGoldGlow 4s infinite ease-in-out;
+}
+
+/* Offset stagger effect for the second column of the cards grid */
+.stats-cards-grid .stat-card:nth-child(even) {
+  transform: translateY(30px); /* initially shifted down */
+}
+.stats-cards-grid .stat-card:nth-child(even).animate {
+  transform: translateY(40px); /* shift down even when animated */
+}
+
+/* Stagger the pulsing glow delays for waves of light */
+.stats-cards-grid .stat-card:nth-child(1).animate { animation-delay: 0s; }
+.stats-cards-grid .stat-card:nth-child(2).animate { animation-delay: 0.8s; }
+.stats-cards-grid .stat-card:nth-child(3).animate { animation-delay: 1.6s; }
+.stats-cards-grid .stat-card:nth-child(4).animate { animation-delay: 2.4s; }
+
+/* Hover state */
+.stat-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(201, 162, 39, 0.8);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 25px rgba(201, 162, 39, 0.4);
+  animation: none; /* Pause pulse on hover to focus on manual hover lift */
+}
+.stats-cards-grid .stat-card:nth-child(odd):hover {
+  transform: translateY(-8px);
+}
+.stats-cards-grid .stat-card:nth-child(even):hover {
+  transform: translateY(32px); /* Maintain the shift but hover lift up by 8px */
+}
+
+@keyframes pulseGoldGlow {
+  0%, 100% {
+    border-color: rgba(201, 162, 39, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 8px rgba(201, 162, 39, 0.05);
+  }
+  50% {
+    border-color: rgba(201, 162, 39, 0.55);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.25), 0 0 20px rgba(201, 162, 39, 0.25);
+  }
+}
+
+/* Icon Container */
+.stat-card__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stat-card:hover .stat-card__icon {
+  transform: scale(1.1) rotate(6deg);
+}
+
+/* Dynamic colors optimized for dark green background */
+.stat-card__icon.icon-green {
+  background-color: rgba(46, 204, 113, 0.15);
+  color: #2ecc71; /* High contrast green */
+}
+.stat-card__icon.icon-gold {
+  background-color: rgba(201, 162, 39, 0.15);
+  color: var(--gold);
+}
+.stat-card__icon.icon-teal {
+  background-color: rgba(0, 188, 212, 0.15);
+  color: #00bcd4; /* High contrast cyan/teal */
+}
+.stat-card__icon.icon-orange {
+  background-color: rgba(255, 152, 0, 0.15);
+  color: #ff9800; /* High contrast orange */
+}
+
+.stat-card__val {
+  font-size: clamp(24px, 2.5vw, 36px);
+  font-weight: 900;
+  color: #ffffff; /* Clear white value */
+  line-height: 1.15;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.stat-card__lbl {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7); /* Muted white text */
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .stats-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .stats-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .stats-content .eyebrow {
+    justify-content: center;
+  }
+  .stats-content .section-subtitle {
+    max-width: 100%;
+  }
+  /* Remove offset on smaller screens to avoid massive blank spaces */
+  .stats-cards-grid .stat-card:nth-child(even) {
+    transform: translateY(30px);
+  }
+  .stats-cards-grid .stat-card:nth-child(even).animate {
+    transform: translateY(0);
+  }
+  .stats-cards-grid .stat-card:nth-child(even):hover {
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-cards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .stat-card {
+    aspect-ratio: auto;
+    min-height: auto;
+    padding: 32px 20px;
+  }
+}
+

@@ -1,0 +1,177 @@
+export interface Project {
+  id: number;
+  name: string;
+  desc: string;
+  longDesc: string;
+  cat: 'maintenance' | 'renovation' | 'cleaning' | 'lighting' | 'water' | 'building';
+  done: boolean;
+  req: number;
+  rem: number;
+  pct: number;
+  color: 'moss' | 'earth' | 'sage' | 'sand';
+  tag: string;
+  tagClass: string;
+  target?: string;
+  images: string[];
+  videos: string[];
+}
+
+export const projects: Project[] = [
+  {
+    id: 1,
+    name: 'مشروع صيانة المساجد الشاملة',
+    desc: 'صيانة الإنارة والسباكة وأنظمة التكييف وفلاتر المياه وتجديد الفرش عند الحاجة',
+    longDesc: 'يهدف هذا المشروع إلى توفير خدمات صيانة شاملة ودورية لمساجد المحافظة، تشمل: صيانة أنظمة الإنارة الكهربائية، وإصلاح شبكات السباكة ومياه الشرب، وصيانة وحدات التكييف والتبريد، وتغيير فلاتر مياه التحلية، وتجديد الفرش والسجاد عند الحاجة. يشمل المشروع فرق متخصصة تعمل بصفة دورية ومنتظمة لضمان استمرارية الخدمة وتوفير بيئة صلاة لائقة ومريحة للمصلين طوال العام.',
+    cat: 'maintenance',
+    done: false,
+    req: 500000,
+    rem: 350000,
+    pct: 30,
+    color: 'moss',
+    tag: 'صيانة',
+    tagClass: 'green',
+    target: '20 مسجد',
+    images: [
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-267.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-269.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-26.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-263.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-186.jpeg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-28.mp4',
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-31.mp4',
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-34.mp4'
+    ]
+  },
+  {
+    id: 2,
+    name: 'مشروع ترميم وتأهيل المساجد',
+    desc: 'دهان، بلاط أرضيات، أبواب ونوافذ، حماية الأسقف، ترميم دورات المياه وتأهيل المداخل',
+    longDesc: 'يستهدف مشروع الترميم والتأهيل إعادة المساجد إلى أفضل حالاتها من خلال أعمال ترميم شاملة تشمل: إعادة دهان الجدران الداخلية والخارجية، وتبديل البلاط وأرضيات دورات المياه، وصيانة وإصلاح الأبواب والنوافذ والمداخل، وحماية الأسقف من الرطوبة والتشققات، وترميم دورات المياه وتحديث تجهيزاتها، وتأهيل المداخل الرئيسية وتهيئة أماكن انتظار المصلين. يُعدّ هذا المشروع من أكثر المشاريع أثراً في تحسين المظهر الحضاري للمساجد.',
+    cat: 'renovation',
+    done: false,
+    req: 1500000,
+    rem: 1200000,
+    pct: 20,
+    color: 'earth',
+    tag: 'ترميم',
+    tagClass: 'gold',
+    target: '3 مساجد',
+    images: [
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-172.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-291.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-220.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-285.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-140.jpeg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-35.mp4',
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-37.mp4'
+    ]
+  },
+  {
+    id: 3,
+    name: 'مشروع نظافة المساجد',
+    desc: 'غسيل وتعقيم المساجد وفرشها وتوفير مستلزمات النظافة على مدار العام',
+    longDesc: 'يضمن مشروع نظافة المساجد الحفاظ على نظافة وطهارة بيوت الله على مدار العام، وذلك من خلال فرق متخصصة تقوم بـ: الغسيل الدوري الشامل للأرضيات والجدران، وتعقيم الفرش والسجاد وتنظيفه بمعدات احترافية، وتوفير مستلزمات النظافة اليومية من مطهرات ومعقمات وأدوات نظافة، والاهتمام الخاص بنظافة دورات المياه ونظافتها وتجهيزها بشكل دائم. يستهدف المشروع ضمان بيئة طاهرة ومريحة لجميع المصلين في كل وقت.',
+    cat: 'cleaning',
+    done: false,
+    req: 150000,
+    rem: 90000,
+    pct: 40,
+    color: 'sage',
+    tag: 'نظافة',
+    tagClass: 'blue',
+    target: '90 مسجد',
+    images: [
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-68.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-109.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-69.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-58.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-57.jpeg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-38.mp4',
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-39.mp4'
+    ]
+  },
+  {
+    id: 4,
+    name: 'مشروع تعطير المساجد',
+    desc: 'توفير وتوزيع معطرات الجو والبخور لتهيئة أجواء إيمانية داخل المساجد',
+    longDesc: 'يسعى مشروع تعطير المساجد إلى تهيئة أجواء روحانية وإيمانية داخل بيوت الله، عبر توفير وتوزيع أجود أنواع معطرات الجو والبخور المختارة بعناية على مساجد المحافظة. تتضمن خدمات المشروع: توزيعاً منتظماً لمعطرات الجو عالية الجودة، وتوفير البخور والمبخرات، وصيانة أجهزة البخور الكهربائية الموجودة في المساجد، والحرص على استمرارية هذه الخدمة في جميع أوقات الصلوات. ترتبط هذه الخدمة بتعزيز التجربة الروحية للمصلي داخل المسجد.',
+    cat: 'lighting',
+    done: false,
+    req: 45000,
+    rem: 25000,
+    pct: 44,
+    color: 'moss',
+    tag: 'تعطير',
+    tagClass: 'green',
+    target: '90 مسجداً',
+    images: [
+      'https://res.cloudinary.com/kivbbrnl/image/upload/1.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/2.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/3.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-165.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-166.jpeg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-40.mp4',
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-41.mp4'
+    ]
+  },
+  {
+    id: 5,
+    name: 'مشروع سُقيا الماء للمساجد',
+    desc: 'توفير قوارير مياه للمصلين وتعبئة خزانات مياه التحلية باستمرار',
+    longDesc: 'يوفر مشروع سُقيا الماء مياهاً نقية وصحية لمصلي مساجد المحافظة على مدار العام، عبر: تركيب برادات مياه في مداخل المساجد وساحاتها، وتعبئة الخزانات بمياه التحلية بصفة منتظمة، وتوفير أكواب وزجاجات المياه للمصلين في الأوقات الحارة، وصيانة برادات الماء وضمان نظافتها الدائمة. يُعدّ هذا المشروع من أكثر المشاريع خدمةً يومية مباشرة للمصلين خاصة في فصول الصيف.',
+    cat: 'water',
+    done: false,
+    req: 500000,
+    rem: 320000,
+    pct: 36,
+    color: 'sand',
+    tag: 'سقيا الماء',
+    tagClass: 'blue',
+    target: '100 مسجد',
+    images: [
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-134.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-167.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-169.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-170.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-171.jpeg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-42.mp4',
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-43.mp4'
+    ]
+  },
+  {
+    id: 6,
+    name: 'مشروع بناء المساجد',
+    desc: 'الإسهام في بناء مساجد جديدة وفق الاحتياج المجتمعي وأعلى معايير الجودة الهندسية',
+    longDesc: 'يمثّل مشروع بناء المساجد قمة العطاء الخيري، إذ يهدف إلى المساهمة في إنشاء مساجد جديدة تلبي احتياجات الأحياء المتنامية في محافظة الخبراء. يعتمد المشروع على: دراسة احتياجات المجتمع وتحديد المناطق الأكثر حاجة، وتوفير التصاميم الهندسية الملائمة، والإشراف على تنفيذ أعمال البناء وفق أعلى معايير الجودة، وتأهيل المسجد الجديد بالكامل (فرش – إنارة – دورات مياه – مكيفات). يجمع المشروع عطاء الدنيا والآخرة، إذ أن من بنى مسجداً لله بنى الله له بيتاً في الجنة.',
+    cat: 'building',
+    done: false,
+    req: 2000000,
+    rem: 2000000,
+    pct: 5,
+    color: 'earth',
+    tag: 'بناء',
+    tagClass: 'gold',
+    target: 'مسجد واحد حسب الدعم',
+    images: [
+      'https://res.cloudinary.com/kivbbrnl/image/upload/image-02.jpg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/alryan.png',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-225.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-250.jpeg',
+      'https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-274.jpeg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-44.mp4',
+      'https://res.cloudinary.com/kivbbrnl/video/upload/pasted-movie-45.mp4'
+    ]
+  }
+];

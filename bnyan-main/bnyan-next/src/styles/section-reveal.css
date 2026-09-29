@@ -1,0 +1,21 @@
+/* ── SECTION SCROLL REVEAL (post-hero home sections) ── */
+.section-reveal{--reveal-dur:.95s;--reveal-ease:cubic-bezier(.22,1,.36,1)}
+.section-reveal .reveal-block{
+  opacity:0;transform:translateY(72px) scale(.94);filter:blur(8px);
+  transition:opacity var(--reveal-dur) var(--reveal-ease),transform var(--reveal-dur) var(--reveal-ease),filter var(--reveal-dur) var(--reveal-ease);
+  will-change:opacity,transform,filter}
+.section-reveal.is-revealed .reveal-block{opacity:1;transform:none;filter:none}
+
+.reveal-stagger > *{
+  opacity:0;transform:translateY(48px) scale(.96);
+  transition:opacity .85s var(--reveal-ease),transform .85s var(--reveal-ease)}
+.section-reveal.is-revealed .reveal-stagger > *{opacity:1;transform:none}
+
+/* projects pin */
+.section-reveal .phs__pin .reveal-block{transform:translateY(40px) scale(.92)}
+.section-reveal.is-revealed .phs__pin .reveal-block{transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .section-reveal .reveal-block,.reveal-stagger > *{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+}
+

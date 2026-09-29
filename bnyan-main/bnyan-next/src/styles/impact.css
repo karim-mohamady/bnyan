@@ -1,0 +1,25 @@
+/* ── IMPACT · soft achievement counters ── */
+.impact{position:relative;overflow:hidden;padding:84px 0;
+  background:linear-gradient(180deg,var(--surface) 0%,#eef3ee 100%)}
+.impact__inner{max-width:1080px;margin:8px auto 0;display:grid;grid-template-columns:repeat(4,1fr)}
+.impact__item{position:relative;text-align:center;padding:14px 26px}
+.impact__item + .impact__item::before{content:'';position:absolute;top:16%;bottom:16%;inset-inline-start:0;width:1px;
+  background:linear-gradient(180deg,transparent,rgba(26,107,60,.16),transparent)}
+.impact__chip{width:54px;height:54px;border-radius:16px;background:rgba(26,107,60,.08);color:var(--green);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.impact__num{font-size:clamp(30px,3.6vw,42px);font-weight:900;color:var(--green-dark);line-height:1.1;letter-spacing:.02em;
+  display:flex;align-items:baseline;justify-content:center;gap:5px}
+.impact__num .unit{font-size:.5em;font-weight:800;color:var(--green)}
+.impact__label{margin:12px auto 0;font-size:13.5px;color:var(--muted);line-height:1.65;max-width:190px}
+.impact__note{text-align:center;color:var(--muted);font-size:12.5px;margin-top:36px}
+
+@media(max-width:768px){
+  .impact{padding:56px 0}
+  .impact__inner{grid-template-columns:1fr 1fr;row-gap:10px}
+  .impact__item{padding:22px 16px}
+  .impact__item + .impact__item::before{display:none}
+}
+@media(max-width:480px){
+  .impact__inner{grid-template-columns:1fr 1fr}
+}
+

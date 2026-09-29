@@ -1,0 +1,45 @@
+/* ── HOME ABOUT (about-v2 sticky reveal block) ── */
+.about-v2{position:relative;z-index:2;background:#fff;overflow:hidden;padding:140px 0;margin-top:-100vh;border-radius:28px 28px 0 0;box-shadow:0 -16px 48px rgba(8,32,20,.08)}
+.about-v2-pattern{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%231a6b3c' stroke-width='1.5' stroke-opacity='0.03'%3E%3Cpath d='M20 0L40 0L60 20L60 40L40 60L20 60L0 40L0 20Z'/%3E%3Cpath d='M30 10L50 30L30 50L10 30Z'/%3E%3Cpath d='M15 15h30v30h-30z'/%3E%3C/g%3E%3C/svg%3E");z-index:0}
+.about-v2-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:40px;align-items:center}
+.about-v2-images{position:relative;padding:20px;z-index:1}
+.about-v2-images::before{content:'';position:absolute;inset:0;background:var(--green);border-radius:20px 80px 20px 80px;opacity:0.06;z-index:0;transform:translate(-16px, 16px)}
+.about-v2-img-main{border-radius:20px 80px 20px 80px;overflow:hidden;box-shadow:var(--shadow-elegant);position:relative;z-index:2;border:8px solid #fff}
+.about-v2-img-main img{width:100%;height:560px;object-fit:cover;display:block}
+.about-v2-img-main img.slide-overlay{position:absolute;top:0;left:0;opacity:0;transition:opacity 0.8s ease-in-out;z-index:2}
+.about-v2-img-main.show-alt img.slide-overlay{opacity:1}
+.about-v2-decor{position:absolute;top:-10px;right:-10px;width:140px;height:140px;background:radial-gradient(circle, var(--gold) 2.5px, transparent 2.5px);background-size:14px 14px;opacity:0.4;z-index:1;border-radius:50%}
+.about-v2-badge{position:absolute;bottom:40px;right:-30px;background:var(--green);color:#fff;border-radius:20px;padding:18px 28px;display:flex;align-items:center;gap:16px;box-shadow:0 16px 40px rgba(26,107,60,.35);z-index:4;border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(10px)}
+.about-v2-badge .badge-icon{width:48px;height:48px;background:rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center}
+.about-v2-badge .badge-icon svg{color:var(--gold-light)}
+.about-v2-badge .badge-text{display:flex;flex-direction:column;text-align:right}
+.about-v2-badge .badge-text span{font-size:26px;font-weight:900;line-height:1;letter-spacing:.02em;color:var(--gold-light)}
+.about-v2-badge .badge-text small{font-size:13px;font-weight:700;line-height:1.4;opacity:0.95;margin-top:4px}
+.about-v2-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center}
+.about-v2-desc{font-size:16px;line-height:1.95;color:var(--muted);margin-bottom:32px;display:flex;flex-direction:column;gap:16px;position:relative}
+.about-v2-license{display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px 24px;margin-bottom:36px;box-shadow:var(--shadow-soft);transition:.25s}
+.about-v2-license:hover{box-shadow:var(--shadow-elegant);transform:translateY(-3px)}
+.about-v2-license .license-icon{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 16px rgba(26,107,60,.25)}
+.about-v2-license .license-icon svg{color:#fff}
+.about-v2-license .license-info{display:flex;flex-direction:column;gap:4px}
+.about-v2-license .license-info strong{font-size:15px;font-weight:800;color:var(--dark)}
+.about-v2-license .license-info span{font-size:13px;color:var(--muted)}
+.about-v2-actions{display:flex;align-items:center;gap:16px}
+
+@media(max-width:1024px){
+  .about-v2-grid{grid-template-columns:1fr;gap:48px}
+  .about-v2-images{padding:0;max-width:600px;margin:0 auto 40px}
+  .about-v2-img-main img{height:480px}
+  .about-v2-badge{bottom:-20px;right:20px}
+  .about-v2-desc::before{display:none}
+}
+@media(max-width:480px){
+  .about-v2-images::before{display:none}
+  .about-v2-img-main{border-radius:20px 80px 20px 80px;border-width:4px}
+  .about-v2-img-main img{height:320px}
+  .about-v2-badge{padding:12px 18px;right:10px;bottom:-15px}
+  .about-v2-badge .badge-icon{width:38px;height:38px}
+  .about-v2-badge .badge-text span{font-size:20px}
+  .about-v2-license{flex-direction:column;text-align:center;padding:20px}
+}
+

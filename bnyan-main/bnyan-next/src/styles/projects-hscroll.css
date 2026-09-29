@@ -1,0 +1,359 @@
+/* ── FEATURED PROJECTS · horizontal-scroll-on-vertical-scroll ── */
+.phs { position:relative; background:#fff; }
+.phs__pin {
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:hidden;
+  background: #fcfcfc; /* Super clean background */
+}
+
+/* Moving Premium Background Pattern */
+.phs__pin::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200vmax;
+  height: 200vmax;
+  margin-top: -100vmax;
+  margin-left: -100vmax;
+  z-index: 0;
+  opacity: var(--bg-opacity, 0); /* Dynamically controlled via JS */
+  pointer-events: none;
+  background-color: var(--green);
+  -webkit-mask-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/islamic-geometric-patterns-moorish-architecture-henna-pattern-design-0592fcb0a4faaf73f00a2ee50294929c.png');
+  -webkit-mask-size: 500px 500px;
+  -webkit-mask-repeat: repeat;
+  mask-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/islamic-geometric-patterns-moorish-architecture-henna-pattern-design-0592fcb0a4faaf73f00a2ee50294929c.png');
+  mask-size: 500px 500px;
+  mask-repeat: repeat;
+  animation: phsBgSpin 240s linear infinite;
+  will-change: opacity;
+}
+
+@keyframes phsBgSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.phs__progress{position:absolute;top:0;left:0;right:0;height:4px;background:rgba(0,0,0,.04);z-index:6}
+.phs__progress-bar{display:block;height:100%;width:0;background:var(--green);transition:width .08s linear}
+
+/* fixed section heading */
+.phs__head{position:absolute;top:clamp(80px,12vh,120px);right:15vw;z-index:5;color:var(--dark);max-width:min(600px,80vw);pointer-events:none}
+.phs__head .eyebrow{color:var(--green);margin-bottom:10px;font-weight:800;letter-spacing:.05em;display:flex;align-items:center;gap:8px}
+.phs__head .eyebrow::before {content:'';display:block;width:24px;height:2px;background:var(--green)}
+.phs__head h2{font-size:clamp(28px,3.5vw,44px);font-weight:900;line-height:1.2; letter-spacing: -0.02em}
+
+/* viewport + track */
+.phs__viewport{position:relative;z-index:1;height:100%;overflow:hidden}
+.phs__track{display:flex;height:100%;align-items:flex-end;padding-bottom:clamp(80px, 12vh, 120px);gap:clamp(30px,4vw,50px);width:max-content;will-change:transform}
+
+/* panel */
+.phs-card {
+  position:relative;
+  flex:0 0 68vw;
+  height:clamp(480px, 62vh, 680px);
+  border-radius:32px;
+  overflow:hidden;
+  display:flex;
+  align-items:stretch;
+  background:#fff;
+  box-shadow:0 24px 50px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03);
+  padding:0;
+}
+.phs-card:first-child { margin-right: 15vw; }
+.phs-card:last-child { margin-left: 15vw; }
+
+.phs-card__media {
+  position:relative;
+  flex: 0 0 52%;
+  width: 52%;
+  height:100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 60% 40%;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  background: var(--border, #eaeaea);
+}
+.phs-card__media img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.phs-card__media-img-0 {
+  grid-row: 1;
+  grid-column: 1 / span 4;
+}
+.phs-card__media-img-1 {
+  grid-row: 2;
+  grid-column: 1;
+}
+.phs-card__media-img-2 {
+  grid-row: 2;
+  grid-column: 2;
+}
+.phs-card__media-img-3 {
+  grid-row: 2;
+  grid-column: 3;
+}
+.phs-card__media-img-4 {
+  grid-row: 2;
+  grid-column: 4;
+}
+.phs-card:hover .phs-card__media img {
+  transform: scale(1.06);
+}
+.phs-card__tag {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+  background: #fff;
+  color: var(--dark);
+  font-size: 14px;
+  font-weight: 800;
+  padding: 8px 24px;
+  border-radius: 99px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.phs-card__body {
+  position:relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding:clamp(30px, 3.5vw, 48px);
+  z-index: 1;
+}
+
+/* Premium Islamic Watermark */
+.phs-card__body::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 280px;
+  height: 280px;
+  z-index: -1;
+  opacity: 0.05;
+  pointer-events: none;
+  background-color: var(--green);
+  -webkit-mask-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/islamic-geometric-patterns-moorish-architecture-henna-pattern-design-0592fcb0a4faaf73f00a2ee50294929c.png');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/islamic-geometric-patterns-moorish-architecture-henna-pattern-design-0592fcb0a4faaf73f00a2ee50294929c.png');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease;
+}
+
+.phs-card:hover .phs-card__body::after {
+  transform: scale(1.1) rotate(5deg);
+  opacity: 0.08;
+}
+
+.phs-card__body-top {
+  flex: 1;
+}
+.phs-card__body-bottom {
+  margin-top: auto;
+}
+
+.phs-card__title {
+  font-size:clamp(24px,2.5vw,34px);
+  font-weight:900;
+  line-height:1.25;
+  margin-bottom:12px;
+  color: var(--dark);
+}
+.phs-card__title::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--gold);
+  margin-bottom: 20px;
+}
+.phs-card__desc {
+  font-size:15px;
+  line-height:1.85;
+  color:var(--muted);
+  margin-bottom:20px;
+  max-width: 90%;
+}
+.phs-card__target {
+  font-size:14px;
+  color:var(--green-deep);
+  background: var(--surface);
+  padding: 12px 20px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(26,107,60,0.1);
+}
+.phs-card__target .icon {
+  fill: var(--green);
+}
+.phs-card__target strong {
+  color: var(--green-deep);
+  font-weight: 800;
+}
+
+.phs-card__progress-label {
+  display:flex;
+  justify-content:space-between;
+  font-size:15px;
+  font-weight: 700;
+  color:var(--dark);
+  margin-bottom:12px;
+}
+.phs-card__progress-label span:first-child {
+  color: var(--muted);
+  font-weight: 600;
+}
+.phs-card__track {
+  height:10px;
+  border-radius:99px;
+  background:#f0f2f0;
+  overflow:hidden;
+  margin-bottom:24px;
+}
+.phs-card__fill {
+  display:block;
+  height:100%;
+  border-radius:99px;
+  background:var(--green); /* Clean green */
+}
+
+.phs-card__foot {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.phs-card__budget {
+  font-size:13px;
+  color:var(--muted);
+}
+.phs-card__budget strong {
+  display:block;
+  font-size:20px;
+  color:var(--dark);
+  margin-top:4px;
+  font-weight: 900;
+}
+
+/* CTA panel */
+.phs-card--cta {
+  background: var(--green-deep); /* Elegant dark green */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.phs-card--cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(201,162,39,0.15), transparent 60%);
+  pointer-events: none;
+}
+.phs-cta {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 500px;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.phs-cta-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  color: var(--gold);
+}
+.phs-cta h3 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.phs-cta p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 40px;
+}
+
+/* dots + swipe hint */
+.phs__dots{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:6;display:flex;gap:10px}
+.phs__dot{width:10px;height:10px;border-radius:99px;background:rgba(0,0,0,.15);transition:all .3s ease}
+.phs__dot.active{width:32px;background:var(--green)}
+.phs__hint{display:none}
+
+/* ── MOBILE · native swipe carousel ── */
+@media(max-width:992px){
+  .phs-card {
+    flex-direction: column;
+    height: auto;
+  }
+  .phs-card__media {
+    flex: 0 0 280px;
+    width: 100%;
+  }
+}
+
+@media(max-width:768px){
+  .phs{height:auto!important}
+  .phs__pin{position:static;height:auto;padding:110px 0 40px; background: #fcfcfc;}
+  .phs__pin::before { display: none; }
+  .phs__progress{display:none}
+  .phs__head{position:static;margin:0 auto 32px;text-align:center;padding:0 24px;max-width:none}
+  .phs__head .eyebrow{justify-content: center; margin-bottom: 12px;}
+  .phs__head .eyebrow::before { display: none; }
+  .phs__viewport{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 6vw}
+  .phs__viewport::-webkit-scrollbar{display:none}
+  .phs__track{height:auto;gap:20px;padding-inline:0;transform:none!important;display:flex;align-items:stretch;}
+  
+  .phs-card{flex:0 0 88vw; display:flex; flex-direction:column; border-radius:24px;scroll-snap-align:center;}
+  .phs-card:first-child { margin-right: 0; }
+  .phs-card:last-child { margin-left: 0; }
+  
+  .phs-card__media { flex: 0 0 240px; }
+  .phs-card__body { padding: 24px; display:flex; flex-direction:column; flex:1; }
+  .phs-card__title { font-size: 22px; }
+  .phs-card__desc { font-size: 14.5px; margin-bottom: 16px; }
+  .phs-card__index { margin-bottom: 16px; }
+  .phs-card__body-bottom { margin-top: auto; }
+  
+  .phs-card--cta{height: auto; min-height: 480px;}
+  .phs-cta { padding: 40px 20px; }
+  
+  .phs__dots{position:static;transform:none;margin:32px auto 0;justify-content:center}
+  .phs__hint{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px auto 0;color:var(--muted);font-size:13px;font-weight:600}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .phs{height:auto!important}
+  .phs__pin{position:static;height:auto}
+  .phs__viewport{overflow-x:auto;scroll-snap-type:x mandatory}
+  .phs__track{transform:none!important}
+  .phs-card{flex:0 0 92vw;scroll-snap-align:center}
+}
+

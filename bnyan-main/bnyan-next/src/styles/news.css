@@ -1,0 +1,10 @@
+/* ── NEWS (home cards) ── */
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.n-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-soft);transition:.22s;display:flex;flex-direction:column}
+.n-card:hover{box-shadow:var(--shadow-elegant);transform:translateY(-3px)}
+.n-date{font-size:11px;font-weight:700;color:var(--gold);margin-bottom:12px;letter-spacing:.06em}
+.n-card h3{font-size:16px;font-weight:800;color:var(--dark);margin-bottom:10px;line-height:1.45}
+.n-card p{font-size:13px;color:var(--muted);line-height:1.75;flex:1}
+.n-link{display:inline-flex;align-items:center;gap:5px;color:var(--green);font-size:13px;font-weight:700;text-decoration:none;margin-top:16px;transition:.18s}
+.n-link:hover{color:var(--gold)}
+

@@ -1,0 +1,360 @@
+/* ── REDESIGNED BOARD OF DIRECTORS PAGE STYLES (SIMPLE & PREMIUM) ── */
+
+/* ── HERO BANNER ── */
+.board-hero {
+  position: relative;
+  min-height: 480px;
+  padding: 160px 0 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green-deep);
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+}
+
+.board-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.22;
+  z-index: 2;
+}
+
+.board-hero-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/islamic-geometric-patterns-moorish-architecture-henna-pattern-design-0592fcb0a4faaf73f00a2ee50294929c.png');
+  background-size: 260px;
+  background-repeat: repeat;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  z-index: 3;
+}
+
+.board-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 52, 32, 0.94) 0%, rgba(12, 34, 20, 0.86) 100%);
+  z-index: 1;
+}
+
+.board-hero .container {
+  position: relative;
+  z-index: 4;
+}
+
+.board-hero h2 {
+  font-size: clamp(26px, 3.8vw, 42px);
+  font-weight: 900;
+  color: var(--gold);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.board-hero p {
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+
+.board-hero-features {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.board-feature-chip {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 8px 18px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.board-feature-chip i {
+  color: var(--gold);
+  font-size: 12px;
+}
+
+/* ── ACCREDITATION PANEL ── */
+.accreditation-panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 30px;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .accreditation-panel {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+}
+
+.accreditation-icon {
+  font-size: 24px;
+  color: var(--gold-dark);
+  flex-shrink: 0;
+}
+
+.accreditation-text {
+  font-size: 14px;
+  color: var(--dark);
+  line-height: 1.7;
+}
+
+.accreditation-text strong {
+  color: var(--green-dark);
+  font-weight: 800;
+}
+
+/* ── BOARD GRID LAYOUT ── */
+.board-layout-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.board-intro-text {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 40px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+  font-size: 14.5px;
+}
+
+/* Centered layout for featured president card */
+.board-featured-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.board-members-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+  .board-members-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* ── BOARD CARD STYLING ── */
+.board-card {
+  background-color: #fff;
+  border: 1px solid var(--border);
+  border-right: 5px solid var(--green); /* thick brand accent line on the right side */
+  border-radius: 16px;
+  padding: 30px 28px;
+  text-align: right; /* Right align Arabic text */
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.board-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-elegant);
+  border-right-color: var(--gold); /* transition border color to gold on hover */
+}
+
+/* Featured President Card styles */
+.board-card.featured {
+  max-width: 540px;
+  width: 100%;
+  border-right-color: var(--gold);
+}
+
+.board-card.featured:hover {
+  border-right-color: var(--green);
+}
+
+/* Role Badges */
+.board-role-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 15px;
+  margin-bottom: 12px;
+  display: inline-block;
+  align-self: flex-start; /* make badge size fit text instead of full width */
+}
+
+.board-role-badge.president {
+  background-color: rgba(201, 162, 39, 0.08);
+  color: var(--gold-dark);
+  border: 1px solid rgba(201, 162, 39, 0.15);
+}
+
+.board-role-badge.vice-president {
+  background-color: rgba(26, 107, 60, 0.06);
+  color: var(--green);
+  border: 1px solid rgba(26, 107, 60, 0.12);
+}
+
+.board-role-badge.member {
+  background-color: var(--surface);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.board-card h4 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.board-card.featured h4 {
+  font-size: 17.5px;
+}
+
+.board-card .board-tagline {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── DONATION CTA BANNER ── */
+.board-donation-cta {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--green-deep) 0%, rgba(12, 34, 20, 0.9) 100%);
+  padding: 60px 40px;
+  text-align: center;
+  color: #fff;
+  box-shadow: var(--shadow-elegant);
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.board-donation-cta-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/pasted-image-291.jpeg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  z-index: 1;
+}
+
+.board-donation-cta-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://res.cloudinary.com/kivbbrnl/image/upload/islamic-geometric-patterns-moorish-architecture-henna-pattern-design-0592fcb0a4faaf73f00a2ee50294929c.png');
+  background-size: 240px;
+  background-repeat: repeat;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  z-index: 2;
+}
+
+.board-donation-cta-content {
+  position: relative;
+  z-index: 3;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.board-donation-cta h3 {
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.board-donation-cta p {
+  font-size: clamp(13px, 1.5vw, 15px);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.75;
+  margin-bottom: 30px;
+}
+
+.board-donation-cta-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-board-cta-primary {
+  background-color: var(--gold);
+  color: var(--green-dark);
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 12px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(201, 162, 39, 0.2);
+  text-decoration: none;
+}
+
+.btn-board-cta-primary:hover {
+  background-color: #ffd24d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(201, 162, 39, 0.3);
+}
+
+.btn-board-cta-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 11px 26px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-board-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+

@@ -1,0 +1,59 @@
+/* ── HOME NEWS · auto-rotating switcher (titles + details) ── */
+.newsx{display:grid;grid-template-columns:.82fr 1.18fr;gap:24px;align-items:stretch}
+
+/* right: list of titles (tabs) */
+.newsx-tabs{display:flex;flex-direction:column;gap:12px}
+.newsx-tab{position:relative;overflow:hidden;text-align:start;font-family:inherit;cursor:pointer;
+  background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 20px;
+  display:flex;flex-direction:column;gap:7px;flex:1;justify-content:center;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background .3s ease}
+.newsx-tab:hover{border-color:rgba(26,107,60,.28);transform:translateY(-2px)}
+.newsx-tab.active{border-color:transparent;color:#fff;
+  background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 60%,var(--green-deep) 100%);
+  box-shadow:0 16px 38px rgba(26,107,60,.3)}
+.newsx-tab__meta{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;color:var(--gold-dark)}
+.newsx-tab.active .newsx-tab__meta{color:var(--gold-light)}
+.newsx-tab__title{font-size:15px;font-weight:800;color:var(--dark);line-height:1.5}
+.newsx-tab.active .newsx-tab__title{color:#fff}
+.newsx-tab__bar{position:absolute;inset-inline:0;bottom:0;height:3px;background:rgba(255,255,255,.22);opacity:0}
+.newsx-tab.active .newsx-tab__bar{opacity:1}
+.newsx-tab__bar i{display:block;height:100%;width:0;background:var(--gold-light);border-radius:99px}
+
+/* left: details card (light editorial) */
+.newsx-panel{position:relative;overflow:hidden;background:#fff;border:1px solid var(--border);border-radius:24px;
+  box-shadow:var(--shadow-soft);height:var(--newsx-panel-h,auto)}
+.newsx-panel::after{content:'';position:absolute;inset-inline-start:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(180deg,var(--gold),var(--green))}
+.newsx-panel__inner{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;padding:clamp(26px,3vw,44px)}
+.newsx-anim{animation:newsxIn .5s ease both}
+@keyframes newsxIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.newsx-panel__num{position:absolute;top:6px;inset-inline-end:26px;z-index:0;font-size:clamp(90px,12vw,140px);font-weight:900;
+  line-height:1;letter-spacing:-.04em;color:rgba(26,107,60,.06);pointer-events:none}
+.newsx-panel__top{position:relative;z-index:1;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.newsx-panel__badge{display:inline-flex;align-items:center;gap:7px;background:rgba(26,107,60,.09);color:var(--green);
+  font-size:12.5px;font-weight:700;padding:7px 15px;border-radius:99px}
+.newsx-panel__date{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12.5px;font-weight:600}
+.newsx-panel__date svg{color:var(--gold-dark)}
+.newsx-panel__title{position:relative;z-index:1;font-size:clamp(20px,2.4vw,28px);font-weight:900;color:var(--dark);line-height:1.5;margin-bottom:14px}
+.newsx-panel__excerpt{position:relative;z-index:1;font-size:15px;color:var(--muted);line-height:1.95;margin-bottom:24px;flex:1;max-width:62ch}
+.newsx-panel__foot{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  border-top:1px solid var(--border);padding-top:20px}
+.newsx-panel__more{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:#fff;font-size:13.5px;font-weight:700;
+  padding:11px 22px;border-radius:99px;text-decoration:none;transition:background .2s ease,transform .2s ease,box-shadow .2s ease}
+.newsx-panel__more:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 8px 22px rgba(201,162,39,.35)}
+.newsx-panel__count{font-size:12.5px;color:var(--muted);font-weight:600}
+.newsx-panel__count b{color:var(--green);font-weight:800}
+
+@media(max-width:860px){
+  .newsx{grid-template-columns:1fr}
+  .newsx-panel{order:-1}
+  .newsx-tab{flex-direction:row;align-items:center;justify-content:space-between;gap:12px}
+  .newsx-tab__title{font-size:14px}
+}
+@media(max-width:480px){
+  .newsx-panel__num{font-size:88px}
+  .newsx-tab{flex-direction:column;align-items:flex-start}
+  .newsx-panel__foot{flex-direction:column;align-items:flex-start}
+}
+
