@@ -39,7 +39,11 @@ class MediaController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'file' => 'required|file|max:20480', // Max 20MB
+            'file' => ['required', 'file', 'mimes:jpeg,png,webp,svg,pdf,mp4', 'max:20480'],
+        ], [
+            'file.required' => 'يرجى اختيار ملف للرفع.',
+            'file.mimes' => 'نوع الملف غير مدعوم. الأنواع المسموحة: JPG, PNG, WEBP, SVG, PDF, MP4.',
+            'file.max' => 'حجم الملف يتجاوز الحد الأقصى المسموح (20 ميجابايت).',
         ]);
 
         $file = $request->file('file');

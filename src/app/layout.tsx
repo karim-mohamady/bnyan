@@ -35,8 +35,8 @@ import "./globals.css";
 
 const notoKufiArabic = Noto_Kufi_Arabic({
   subsets: ["arabic"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-noto-kufi",
+  display: "swap",
 });
 
 export const metadata: Metadata = {

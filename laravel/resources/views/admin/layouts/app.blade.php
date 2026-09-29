@@ -47,6 +47,9 @@
         </div>
     </div>
 
+    <!-- Admin JS Helpers (Dirty form guard, Sortable, Toasts, Confirm modal) -->
+    <script src="{{ asset('admin/admin.js') }}"></script>
+
     <!-- Scripts Stack -->
     @stack('scripts')
 </body>

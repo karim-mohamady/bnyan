@@ -61,8 +61,8 @@ class ContactController extends Controller
         $notifyEmail = env('CONTACT_NOTIFY_EMAIL');
         if ($notifyEmail) {
             try {
-                // If mail driver configured, can send notification
-                Log::info("[Contact] New message received from: {$contactMessage->name} ({$contactMessage->phone})");
+                Mail::to($notifyEmail)->send(new \App\Mail\ContactReceived($contactMessage));
+                Log::info("[Contact] New message notification sent to {$notifyEmail} for message from {$contactMessage->name}");
             } catch (\Throwable $e) {
                 Log::warning('[Contact] Could not send email notification: ' . $e->getMessage());
             }

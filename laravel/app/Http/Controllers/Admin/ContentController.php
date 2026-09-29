@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\SaveContentRequest;
 use App\Models\SiteContent;
 use App\Models\ActivityLog;
+use App\Services\ContentService;
 use App\Services\RevalidationService;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ContentController extends Controller
 {
-    /**
-     * Map page keys to Arabic titles and descriptions.
-     */
     protected array $pageMeta = [
         'home' => [
             'title' => 'الصفحة الرئيسية',
@@ -53,6 +51,10 @@ class ContentController extends Controller
         ],
     ];
 
+    public function __construct(protected ContentService $contentService)
+    {
+    }
+
     public function index(): View
     {
         $allSchemas = config('content_schema', []);
@@ -85,44 +87,36 @@ class ContentController extends Controller
             'icon' => 'fa-solid fa-file-lines',
         ];
 
-        $content = SiteContent::getPageContent($page);
+        $content = $this->contentService->page($page);
+        $latestUpdatedAt = SiteContent::where('page', $page)->max('updated_at');
 
-        return view('admin.content.edit', compact('page', 'schema', 'pageMeta', 'content'));
+        return view('admin.content.edit', compact('page', 'schema', 'pageMeta', 'content', 'latestUpdatedAt'));
     }
 
-    public function update(Request $request, string $page): RedirectResponse
+    public function update(SaveContentRequest $request, string $page): RedirectResponse
     {
         $schema = config("content_schema.{$page}");
         if (!$schema || $page === 'settings') {
             abort(404);
         }
 
-        foreach ($schema['sections'] ?? [] as $sectionKey => $section) {
-            foreach ($section['fields'] ?? [] as $fieldKey => $fieldConfig) {
-                if ($fieldConfig['type'] === 'repeater') {
-                    $repeaterItems = $request->input($fieldKey, []);
-                    if (is_array($repeaterItems)) {
-                        $repeaterItems = array_values(array_filter($repeaterItems, function ($item) {
-                            if (is_array($item)) {
-                                return !empty(array_filter($item, fn($val) => $val !== null && $val !== ''));
-                            }
-                            return $item !== null && $item !== '';
-                        }));
-                    } else {
-                        $repeaterItems = [];
-                    }
-                    SiteContent::setField($page, $fieldKey, $repeaterItems);
-                } else {
-                    $value = $request->input($fieldKey, $fieldConfig['default'] ?? '');
-                    SiteContent::setField($page, $fieldKey, $value);
-                }
-            }
+        $section = $request->input('_section');
+        $expectedUpdatedAt = $request->input('_expected_updated_at');
+
+        if (!$section) {
+            $firstSec = array_key_first($schema['sections'] ?? []);
+            $section = $firstSec;
         }
 
-        $pageTitle = $this->pageMeta[$page]['title'] ?? $page;
-        ActivityLog::log('update', 'content', null, "تحديث محتوى صفحة: {$pageTitle}");
-        RevalidationService::revalidateTags([$page]);
+        $changedKeys = $this->contentService->savePartial($page, $section, $request->all(), $expectedUpdatedAt);
 
-        return redirect()->route('admin.content.edit', $page)->with('success', __('admin.changes_saved'));
+        $pageTitle = $this->pageMeta[$page]['title'] ?? $page;
+        if (count($changedKeys) > 0) {
+            ActivityLog::log('update', 'content', null, "تحديث محتوى صفحة: {$pageTitle} (قسم: {$section})");
+            RevalidationService::revalidateTags([$page]);
+            return redirect()->route('admin.content.edit', $page)->with('success', __('admin.changes_saved'));
+        }
+
+        return redirect()->route('admin.content.edit', $page)->with('success', 'لم يتم إجراء أي تغييرات (البيانات متطابقة).');
     }
 }
