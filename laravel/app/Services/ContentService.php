@@ -112,6 +112,7 @@ class ContentService
                     $val = str_contains((string)$val, '.') ? (float)$val : (int)$val;
                 }
             } elseif ($type === 'repeater' && is_array($val)) {
+                $subSchema = $fieldConfig['schema'] ?? [];
                 // Clean repeater items
                 $val = array_values(array_filter($val, function ($row) {
                     if (is_array($row)) {
@@ -119,6 +120,26 @@ class ContentService
                     }
                     return $row !== null && $row !== '';
                 }));
+
+                // Normalize nested fields based on sub-schema
+                foreach ($val as &$row) {
+                    if (is_array($row)) {
+                        foreach ($subSchema as $sKey => $sConfig) {
+                            if (array_key_exists($sKey, $row)) {
+                                $sType = $sConfig['type'] ?? 'text';
+                                if ($sType === 'number') {
+                                    $norm = self::normalizeDigits($row[$sKey]);
+                                    if ($norm !== '' && $norm !== null && is_numeric($norm)) {
+                                        $row[$sKey] = str_contains((string)$norm, '.') ? (float)$norm : (int)$norm;
+                                    }
+                                } elseif ($sType === 'toggle') {
+                                    $row[$sKey] = filter_var($row[$sKey], FILTER_VALIDATE_BOOLEAN);
+                                }
+                            }
+                        }
+                    }
+                }
+                unset($row);
             } elseif ($type === 'toggle') {
                 $val = filter_var($val, FILTER_VALIDATE_BOOLEAN);
             }

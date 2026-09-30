@@ -98,7 +98,7 @@
         <div style="display: flex; gap: 12px; align-items: center;">
             <select name="{{ $fieldKey }}" x-model="fieldVal" class="form-control" dir="ltr" style="flex: 1;">
                 <option value="">-- اختر الأيقونة --</option>
-                @foreach(\App\Http\Requests\Admin\SaveContentRequest::SPRITE_ICONS as $iconId)
+                @foreach(\App\Http\Requests\Admin\SaveContentRequest::getSpriteIcons() as $iconId)
                     <option value="{{ $iconId }}">{{ $iconId }}</option>
                 @endforeach
             </select>
@@ -134,7 +134,15 @@
     @elseif($type === 'color-chip')
         <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
             @php
-                $colors = $field['options'] ?? ['moss' => 'طحلبي (Moss)', 'earth' => 'أرضي (Earth)', 'sage' => 'ميرمية (Sage)', 'sand' => 'رملي (Sand)', 'green' => 'أخضر', 'gold' => 'ذهبي'];
+                $rawColors = $field['options'] ?? ['moss' => 'طحلبي (Moss)', 'earth' => 'أرضي (Earth)', 'sage' => 'ميرمية (Sage)', 'sand' => 'رملي (Sand)', 'green' => 'أخضر', 'gold' => 'ذهبي'];
+                $colors = [];
+                foreach ($rawColors as $k => $v) {
+                    if (is_int($k)) {
+                        $colors[$v] = $v;
+                    } else {
+                        $colors[$k] = $v;
+                    }
+                }
             @endphp
             @foreach($colors as $cKey => $cLabel)
                 <label style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid var(--color-border); border-radius: 6px; cursor: pointer;" :style="fieldVal === '{{ $cKey }}' ? 'border-color: var(--color-gold); background: #fefae0;' : ''">
@@ -227,12 +235,34 @@
                                     @if($sType === 'textarea')
                                         <textarea :name="'{{ $fieldKey }}[' + idx + '][{{ $sKey }}]'" x-model="row.{{ $sKey }}" class="form-control" rows="2"></textarea>
                                     @elseif($sType === 'number')
-                                        <input type="number" :name="'{{ $fieldKey }}[' + idx + '][{{ $sKey }}]'" x-model="row.{{ $sKey }}" class="form-control">
+                                        <input type="number" :name="'{{ $fieldKey }}[' + idx + '][{{ $sKey }}]'" x-model="row.{{ $sKey }}" class="form-control"
+                                            @if(isset($sField['min'])) min="{{ $sField['min'] }}" @endif
+                                            @if(isset($sField['max'])) max="{{ $sField['max'] }}" @endif
+                                            @if(isset($sField['step'])) step="{{ $sField['step'] }}" @endif>
                                     @elseif($sType === 'fa-icon')
                                         <div style="display: flex; gap: 6px; align-items: center;">
                                             <input type="text" :name="'{{ $fieldKey }}[' + idx + '][{{ $sKey }}]'" x-model="row.{{ $sKey }}" class="form-control" dir="ltr">
                                             <i :class="row.{{ $sKey }}"></i>
                                         </div>
+                                    @elseif($sType === 'sprite-icon')
+                                        <select :name="'{{ $fieldKey }}[' + idx + '][{{ $sKey }}]'" x-model="row.{{ $sKey }}" class="form-control" dir="ltr">
+                                            <option value="">-- اختر الأيقونة --</option>
+                                            @foreach(\App\Http\Requests\Admin\SaveContentRequest::getSpriteIcons() as $iconId)
+                                                <option value="{{ $iconId }}">{{ $iconId }}</option>
+                                            @endforeach
+                                        </select>
+                                    @elseif($sType === 'select')
+                                        <select :name="'{{ $fieldKey }}[' + idx + '][{{ $sKey }}]'" x-model="row.{{ $sKey }}" class="form-control">
+                                            @foreach($sField['options'] ?? [] as $optKey => $optLabel)
+                                                <option value="{{ is_int($optKey) ? $optLabel : $optKey }}">{{ $optLabel }}</option>
+                                            @endforeach
+                                        </select>
+                                    @elseif($sType === 'color-chip')
+                                        <select :name="'{{ $fieldKey }}[' + idx + '][{{ $sKey }}]'" x-model="row.{{ $sKey }}" class="form-control">
+                                            @foreach($sField['options'] ?? ['green', 'gold', 'teal', 'orange'] as $cKey => $cLabel)
+                                                <option value="{{ is_int($cKey) ? $cLabel : $cKey }}">{{ $cLabel }}</option>
+                                            @endforeach
+                                        </select>
                                     @else
                                         <input type="text" :name="'{{ $fieldKey }}[' + idx + '][{{ $sKey }}]'" x-model="row.{{ $sKey }}" class="form-control" @if($sType === 'url' || $sType === 'image') dir="ltr" @endif>
                                     @endif

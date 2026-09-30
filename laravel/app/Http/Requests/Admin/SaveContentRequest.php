@@ -19,6 +19,28 @@ class SaveContentRequest extends FormRequest
         'icon-thermometer', 'icon-user', 'icon-users', 'icon-whatsapp', 'icon-x', 'icon-youtube'
     ];
 
+    /**
+     * Parse sprite IDs from public/assets/icons/sprite.svg or admin/sprite.svg dynamically,
+     * falling back to static list.
+     */
+    public static function getSpriteIcons(): array
+    {
+        $paths = [
+            base_path('../public/assets/icons/sprite.svg'),
+            public_path('admin/sprite.svg'),
+            public_path('assets/icons/sprite.svg'),
+        ];
+        foreach ($paths as $path) {
+            if (file_exists($path)) {
+                $content = file_get_contents($path);
+                if (preg_match_all('/id="([^"]+)"/', $content, $matches)) {
+                    return array_values(array_unique($matches[1]));
+                }
+            }
+        }
+        return self::SPRITE_ICONS;
+    }
+
     public function authorize(): bool
     {
         return true;
@@ -46,6 +68,8 @@ class SaveContentRequest extends FormRequest
             '_expected_updated_at' => 'nullable|string',
         ];
 
+        $spriteIcons = self::getSpriteIcons();
+
         foreach ($fields as $fieldKey => $fieldConfig) {
             $type = $fieldConfig['type'] ?? 'text';
             $isRequired = !empty($fieldConfig['required']);
@@ -53,9 +77,17 @@ class SaveContentRequest extends FormRequest
 
             switch ($type) {
                 case 'text':
-                case 'color-chip':
                     $fieldRules[] = 'string';
                     $fieldRules[] = 'max:' . ($fieldConfig['max'] ?? 255);
+                    break;
+
+                case 'color-chip':
+                    $fieldRules[] = 'string';
+                    if (!empty($fieldConfig['options'])) {
+                        $opts = $fieldConfig['options'];
+                        $allowed = array_is_list($opts) ? $opts : array_keys($opts);
+                        $fieldRules[] = 'in:' . implode(',', $allowed);
+                    }
                     break;
 
                 case 'textarea':
@@ -85,7 +117,7 @@ class SaveContentRequest extends FormRequest
 
                 case 'sprite-icon':
                     $fieldRules[] = 'string';
-                    $fieldRules[] = 'in:' . implode(',', self::SPRITE_ICONS);
+                    $fieldRules[] = 'in:' . implode(',', $spriteIcons);
                     break;
 
                 case 'fa-icon':
@@ -95,9 +127,8 @@ class SaveContentRequest extends FormRequest
 
                 case 'select':
                     if (!empty($fieldConfig['options'])) {
-                        $allowed = is_array(reset($fieldConfig['options']))
-                            ? array_keys($fieldConfig['options'])
-                            : $fieldConfig['options'];
+                        $opts = $fieldConfig['options'];
+                        $allowed = array_is_list($opts) ? $opts : array_keys($opts);
                         $fieldRules[] = 'in:' . implode(',', $allowed);
                     }
                     break;
@@ -119,12 +150,22 @@ class SaveContentRequest extends FormRequest
                     foreach ($fieldConfig['schema'] ?? [] as $subKey => $subConfig) {
                         $subType = $subConfig['type'] ?? 'text';
                         $subRules = ['nullable'];
-                        if ($subType === 'url' || $subType === 'image' || $subType === 'video') {
+                        if ($subType === 'number') {
+                            $subRules[] = 'numeric';
+                        } elseif ($subType === 'url' || $subType === 'image' || $subType === 'video') {
                             $subRules[] = 'regex:/^https:\/\/.+/i';
                         } elseif ($subType === 'fa-icon') {
                             $subRules[] = 'regex:/^fa-(solid|brands|regular) fa-[a-z0-9-]+$/';
                         } elseif ($subType === 'sprite-icon') {
-                            $subRules[] = 'in:' . implode(',', self::SPRITE_ICONS);
+                            $subRules[] = 'in:' . implode(',', $spriteIcons);
+                        } elseif ($subType === 'select' || $subType === 'color-chip') {
+                            if (!empty($subConfig['options'])) {
+                                $sOpts = $subConfig['options'];
+                                $sAllowed = array_is_list($sOpts) ? $sOpts : array_keys($sOpts);
+                                $subRules[] = 'in:' . implode(',', $sAllowed);
+                            }
+                        } elseif ($subType === 'toggle') {
+                            $subRules[] = 'boolean';
                         }
                         $rules["{$fieldKey}.*.{$subKey}"] = $subRules;
                     }

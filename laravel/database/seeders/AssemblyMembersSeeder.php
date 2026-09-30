@@ -9,16 +9,23 @@ class AssemblyMembersSeeder extends Seeder
 {
     public function run(): void
     {
-        $members = [
-            ['name' => 'محمد بن حمد بن سليمان النوشان', 'role' => 'رئيس مجلس الإدارة', 'city' => 'الخبراء', 'sort_order' => 1],
-            ['name' => 'إبراهيم بن حمود بن عبدالعزيز السويح', 'role' => 'نائب رئيس مجلس الإدارة', 'city' => 'الخبراء', 'sort_order' => 2],
-            ['name' => 'صالح بن عبدالرحمن بن صالح المرشد', 'role' => 'عضو مجلس الإدارة', 'city' => 'الخبراء', 'sort_order' => 3],
-            ['name' => 'نايف بن إبراهيم بن عبدالله الحسيني', 'role' => 'عضو مجلس الإدارة', 'city' => 'الخبراء', 'sort_order' => 4],
-            ['name' => 'ريان بن علي بن عبدالله الميمان', 'role' => 'عضو مجلس الإدارة', 'city' => 'الخبراء', 'sort_order' => 5],
-        ];
+        $jsonPath = database_path('seeders/truth/governance.json');
+        if (!file_exists($jsonPath)) {
+            return;
+        }
 
-        foreach ($members as $m) {
-            AssemblyMember::updateOrCreate(['name' => $m['name']], $m);
+        $data = json_decode(file_get_contents($jsonPath), true);
+        $members = $data['assemblyMembers'] ?? [];
+
+        foreach ($members as $idx => $m) {
+            AssemblyMember::updateOrCreate(
+                ['name' => $m['name']],
+                [
+                    'role' => $m['role'] ?? '',
+                    'city' => $m['city'] ?? '',
+                    'sort_order' => $idx + 1,
+                ]
+            );
         }
     }
 }

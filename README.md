@@ -1,3 +1,17 @@
+Bunyan truth kit
+================
+truth/*.json            Ground truth generated mechanically from bnyan-next/src/data/*.ts (do not edit).
+tools/extract-truth.mjs Regenerates truth/*.json from the source (node --experimental-strip-types).
+tools/verify-strings.mjs Fails if any Arabic/https literal in the Laravel seed layer is not found verbatim in bnyan-next/src.
+tools/string-gate-allowlist.json Explicit, justified exceptions only (starts empty).
+
+Place in the repo root:
+  tools/*                       -> tools/
+  truth/*.json                  -> laravel/database/seeders/truth/
+Run from repo root:
+  node --experimental-strip-types tools/extract-truth.mjs bnyan-next/src/data laravel/database/seeders/truth
+  node tools/verify-strings.mjs bnyan-next/src laravel/config/content_schema.php laravel/database/seeders
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
