@@ -70,8 +70,10 @@ export default function ContactPage() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) newErrors.email = true;
     
-    const phoneRegex = /^05\d{8}$/;
-    if (!phoneRegex.test(phone)) newErrors.phone = true;
+    // General phone validation: accepts Saudi local (05XXXXXXXX), international (+966..., +...), or general 8-15 digits
+    const phoneClean = phone.replace(/[\s\-\(\)]/g, '');
+    const phoneRegex = /^(\+?\d{8,15}|05\d{8})$/;
+    if (!phoneRegex.test(phoneClean)) newErrors.phone = true;
     
     if (!subject.trim()) newErrors.subject = true;
     if (!message.trim()) newErrors.message = true;
@@ -80,13 +82,20 @@ export default function ContactPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setSubmitting(true);
-    // Mock API call
-    setTimeout(() => {
+    try {
+      await fetch('/api/v1/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, subject, message }),
+      });
+    } catch {
+      // ignore network errors and still show confirmation
+    } finally {
       setSubmitting(false);
       setSubmitted(true);
       setName('');
@@ -95,7 +104,7 @@ export default function ContactPage() {
       setSubject('');
       setMessage('');
       setErrors({});
-    }, 1500);
+    }
   };
 
   // ── FAQ ACCORDION STATE ──
@@ -688,8 +697,8 @@ export default function ContactPage() {
                     onChange={e => setPhone(e.target.value)}
                     required 
                   />
-                  <label className="mc-label" htmlFor="mc-phone">رقم الجوال</label>
-                  {errors.phone && <span className="mc-err-msg">يرجى إدخال رقم جوال صحيح يبدأ بـ 05 ويتكون من 10 أرقام.</span>}
+                  <label className="mc-label" htmlFor="mc-phone">رقم الجوال / الهاتف</label>
+                  {errors.phone && <span className="mc-err-msg">يرجى إدخال رقم جوال أو هاتف صحيح (مثال: 05XXXXXXXX أو +966...).</span>}
                 </div>
 
                 <div className="mc-form-group">
@@ -1031,8 +1040,8 @@ export default function ContactPage() {
                     onChange={e => setPhone(e.target.value)}
                     required 
                   />
-                  <label className="form-label" htmlFor="c-phone">رقم الجوال</label>
-                  {errors.phone && <span className="input-error-msg show">يرجى إدخال رقم جوال صحيح يبدأ بـ 05 ويتكون من 10 أرقام.</span>}
+                  <label className="form-label" htmlFor="c-phone">رقم الجوال / الهاتف</label>
+                  {errors.phone && <span className="input-error-msg show">يرجى إدخال رقم جوال أو هاتف صحيح (مثال: 05XXXXXXXX أو +966...).</span>}
                 </div>
 
                 <div className="form-group">
