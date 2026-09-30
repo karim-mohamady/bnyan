@@ -2,6 +2,7 @@
 
 import React, { use, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { projects } from '@/data/projects';
 import Icon from '@/components/Icon';
 
@@ -56,19 +57,7 @@ export default function ProjectDetailsPage({ params }: PageProps) {
   }, [lbOpen, allMedia.length]);
 
   if (!project) {
-    return (
-      <div id="pd-page">
-        <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '20px', padding: '80px 24px', textAlign: 'center' }}>
-          <i className="fa-solid fa-triangle-exclamation" style={{ fontSize: '64px', color: 'var(--gold)' }}></i>
-          <h2 style={{ fontSize: '26px', fontWeight: 800, color: 'var(--dark)' }}>المشروع غير موجود</h2>
-          <p style={{ color: 'var(--muted)', maxWidth: '420px', lineHeight: 1.8 }}>المشروع الذي تبحث عنه غير موجود أو تم حذفه. يرجى العودة لصفحة المشاريع لاستعراض جميع مشاريع الجمعية.</p>
-          <Link href="/projects" className="btn btn-primary btn-lg">
-            <i className="fa-solid fa-arrow-right" style={{ marginLeft: '8px' }}></i>
-            العودة للمشاريع
-          </Link>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
   // ── NUMERAL CONVERSION HELPERS ──

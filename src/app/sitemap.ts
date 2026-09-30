@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { projects } from '@/data/projects';
+import { newsItems } from '@/data/news';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://bnyan.org.sa';
@@ -35,5 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...projectRoutes];
+  const newsRoutes = newsItems.map((_, index) => ({
+    url: `${baseUrl}/news/${index + 1}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...projectRoutes, ...newsRoutes];
 }
