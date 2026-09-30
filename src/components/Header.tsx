@@ -25,12 +25,16 @@ export default function Header() {
   const isGovernanceActive =
     pathname === '/governance' || pathname.startsWith('/governance/');
 
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setScrolled(false);
     setLightTheme(false);
     setGovOpen(false);
     setDrawerGovOpen(false);
+  }
 
+  useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY >= 80;
       setScrolled(isScrolled);
@@ -101,13 +105,10 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = drawerOpen ? 'hidden' : '';
-    if (drawerOpen && isGovernanceActive) {
-      setDrawerGovOpen(true);
-    }
     return () => {
       document.body.style.overflow = '';
     };
-  }, [drawerOpen, isGovernanceActive]);
+  }, [drawerOpen]);
 
   const navLinks: NavLink[] = [
     { href: '/', label: 'الرئيسية', icon: 'home' },
@@ -126,7 +127,15 @@ export default function Header() {
     { href: '/board', label: 'مجلس الإدارة', icon: 'users' },
   ];
 
-  const toggleDrawer = () => setDrawerOpen(!drawerOpen);
+  const toggleDrawer = () => {
+    setDrawerOpen((prev) => {
+      const next = !prev;
+      if (next && isGovernanceActive) {
+        setDrawerGovOpen(true);
+      }
+      return next;
+    });
+  };
   const closeDrawer = () => {
     setDrawerOpen(false);
     setDrawerGovOpen(false);

@@ -550,7 +550,7 @@ export default function DonatePage() {
         </div>
         <div className="footer-cta-overlay"></div>
         <div className="footer-cta-container reveal-block">
-          <h2 className="footer-cta-title">قال ﷺ: "مَن بنى مسجداً لله بنى الله له مثله في الجنة"</h2>
+          <h2 className="footer-cta-title">قال ﷺ: «مَن بنى مسجداً لله بنى الله له مثله في الجنة»</h2>
           <p className="footer-cta-desc">كن شريكاً في هذا الأجر العظيم وساهم معنا في بقاء مساجدنا عامرة بالطاعة، نظيفة، ومريحة للمصلين.</p>
           <button 
             className="footer-cta-btn" 

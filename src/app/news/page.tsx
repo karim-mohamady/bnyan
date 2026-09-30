@@ -4,19 +4,17 @@ import React, { useEffect, useState } from 'react';
 import Icon from '@/components/Icon';
 
 export default function NewsPage() {
-  const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isClient = React.useSyncExternalStore(
+    (onStoreChange) => {
+      window.addEventListener('resize', onStoreChange);
+      return () => window.removeEventListener('resize', onStoreChange);
+    },
+    () => true,
+    () => false
+  );
+  const isMobile = isClient && typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
+  const mounted = isClient;
   const [expandedCards, setExpandedCards] = useState<{[key: number]: boolean}>({});
-
-  useEffect(() => {
-    setMounted(true);
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const toggleExpand = (id: number) => {
     setExpandedCards(prev => ({ ...prev, [id]: !prev[id] }));

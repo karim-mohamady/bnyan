@@ -7,21 +7,16 @@ import { CONTACT, SOCIAL_PLATFORMS } from '@/data/contact';
 import { arRegNo } from '@/utils/ar';
 
 export default function ContactPage() {
-  const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Section Scroll Reveals Intersection Observer (Desktop only)
-  useEffect(() => {
-    setMounted(true);
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const isClient = React.useSyncExternalStore(
+    (onStoreChange) => {
+      window.addEventListener('resize', onStoreChange);
+      return () => window.removeEventListener('resize', onStoreChange);
+    },
+    () => true,
+    () => false
+  );
+  const isMobile = isClient && typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
+  const mounted = isClient;
 
   useEffect(() => {
     if (isMobile) return;

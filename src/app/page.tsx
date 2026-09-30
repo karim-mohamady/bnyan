@@ -263,21 +263,21 @@ export default function HomePage() {
     };
   }, [newsPaused]);
 
-  const handleNewsTabClick = (i: number) => {
+  const handleNewsTabClick = React.useCallback((i: number) => {
     setActiveNewsIdx(i);
     newsStartRef.current = performance.now();
     setNewsProgress(0);
-  };
+  }, []);
 
-  const handleNewsMouseEnter = () => {
+  const handleNewsMouseEnter = React.useCallback(() => {
     setNewsPaused(true);
     newsPauseAtRef.current = performance.now();
-  };
+  }, []);
 
-  const handleNewsMouseLeave = () => {
+  const handleNewsMouseLeave = React.useCallback(() => {
     newsStartRef.current += performance.now() - newsPauseAtRef.current;
     setNewsPaused(false);
-  };
+  }, []);
 
   // ── SECTION REVEALS INTERSECTION OBSERVER ──
   useEffect(() => {

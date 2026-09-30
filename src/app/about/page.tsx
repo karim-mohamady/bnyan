@@ -85,15 +85,24 @@ export default function AboutPage() {
   const [lbOpen, setLbOpen] = useState(false);
   const [lbIndex, setLbIndex] = useState(0);
 
+  useEffect(() => {
+    if (lbOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [lbOpen]);
+
   const openLightbox = (idx: number) => {
     setLbIndex(idx);
     setLbOpen(true);
-    document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
     setLbOpen(false);
-    document.body.style.overflow = '';
   };
 
   const lbPrev = () => {
@@ -164,7 +173,7 @@ export default function AboutPage() {
               <h2>إعمار بيوت الله وعناية مستدامة بالمساجد</h2>
               
               <div className="lead-quote">
-                "جمعية أهلية متخصصة مرخصة رسمياً برقم <strong className="num-ar">{arRegNo("1000806000")}</strong> تُعنى بصيانة المساجد وترميمها وتأمين متطلباتها بمحافظة الخبراء."
+                «جمعية أهلية متخصصة مرخصة رسمياً برقم <strong className="num-ar">{arRegNo("1000806000")}</strong> تُعنى بصيانة المساجد وترميمها وتأمين متطلباتها بمحافظة الخبراء.»
               </div>
               
               <p className="body-text">تأسست الجمعية لتلبية الحاجة الماسة إلى جهة متخصصة ترعى بيوت الله وتحافظ عليها. ونحن نعمل بفضل الله ثم بدعمكم السخي على توفير بيئة إيمانية، مريحة، ونظيفة للمصلين في محافظة الخبراء والمراكز والقرى التابعة لها وفق ممارسات مؤسسية وحوكمة شفافة.</p>
