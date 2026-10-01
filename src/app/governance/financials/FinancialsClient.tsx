@@ -3,7 +3,6 @@
 import GovernanceSubLayout from '@/components/GovernanceSubLayout';
 import Icon from '@/components/Icon';
 import type { FinancialStatement } from '@/lib/api';
-import { openDoc } from '@/utils/openDoc';
 import { ar } from '@/utils/ar';
 
 export default function FinancialsClient({ financialStatements }: { financialStatements: FinancialStatement[] }) {
@@ -25,16 +24,30 @@ export default function FinancialsClient({ financialStatements }: { financialSta
               </div>
               <h3>{doc.title}</h3>
               <p>{doc.notes}</p>
-              <small>المدقق: {doc.auditor}{doc.fileUrl ? '' : ' · بيانات مؤقتة للعرض'}</small>
+              <small>المدقق: {doc.auditor || 'مكتب مراجعة حسابات معتمد'}</small>
             </div>
-            <button
-              type="button"
-              className="gov-doc-btn"
-              onClick={() => openDoc(doc.fileUrl, 'سيتوفر تحميل القوائم قريباً.')}
-            >
-              تحميل
-              <Icon name="chevron-down" width={14} height={14} />
-            </button>
+            {doc.fileUrl ? (
+              <a
+                href={doc.fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="gov-doc-btn"
+                style={{ textDecoration: 'none' }}
+              >
+                تحميل
+                <Icon name="chevron-down" width={14} height={14} />
+              </a>
+            ) : (
+              <span
+                className="gov-doc-btn"
+                style={{ opacity: 0.65, cursor: 'default', background: 'rgba(0,0,0,0.04)', color: '#778877' }}
+                title="القوائم معتمدة ويجري رفع النسخة الإلكترونية"
+              >
+                قيد النشر
+                <Icon name="clock" width={14} height={14} />
+              </span>
+            )}
           </article>
         ))}
       </div>

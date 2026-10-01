@@ -24,7 +24,9 @@ export async function POST(request: NextRequest) {
   if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     errors.email = 'يرجى إدخال بريد إلكتروني صحيح.';
   }
-  const phoneClean = typeof phone === 'string' ? phone.replace(/[\s\-\(\)]/g, '') : '';
+  const phoneClean = typeof phone === 'string'
+    ? phone.replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d).toString()).replace(/[\s\-\(\)]/g, '')
+    : '';
   if (!phoneClean || !/^(\+?\d{8,15}|05\d{8})$/.test(phoneClean)) {
     errors.phone = 'يرجى إدخال رقم جوال أو هاتف صحيح (مثال: 05XXXXXXXX أو +966...).';
   }

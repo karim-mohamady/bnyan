@@ -1,0 +1,77 @@
+{
+  "CONTACT": {
+    "phone": "0536502143",
+    "phoneDisplay": "+966 53 650 2143",
+    "phoneTel": "+966536502143",
+    "email": "bunyan355@gmail.com",
+    "addressShort": "القصيم · الخبراء · طريق الملك فهد",
+    "addressFull": "حي المرقب، الخبراء، منطقة القصيم، المملكة العربية السعودية",
+    "addressLine": "القصيم - الخبراء - طريق الملك فهد",
+    "workingHours": "من الأحد إلى الخميس: 8 ص - 4 م",
+    "licenseNo": "1000806000",
+    "unifiedNo": "7051934854",
+    "mapsUrl": "https://maps.app.goo.gl/tB3aC7VvD9nF6WbA9",
+    "whatsappUrl": "https://wa.me/966536502143",
+    "bank": {
+      "name": "مصرف الراجحي",
+      "nameEn": "Al Rajhi Bank",
+      "accountName": "جمعية بنيان للعناية بالمساجد بالخبراء",
+      "iban": "SA8680000265608010979797",
+      "ibanDisplay": "SA86 8000 0265 6080 1097 9797"
+    },
+    "instagram": {
+      "handle": "@Bunyan355",
+      "url": "https://instagram.com/Bunyan355"
+    },
+    "x": {
+      "handle": "@Bunyan355Bunyan",
+      "url": "https://x.com/Bunyan355Bunyan"
+    },
+    "youtube": {
+      "handle": "جمعية بنيان",
+      "url": "https://www.youtube.com/@Bunyan355"
+    }
+  },
+  "SOCIAL_PLATFORMS": [
+    {
+      "id": "whatsapp",
+      "icon": "whatsapp",
+      "title": "واتساب",
+      "handle": "0536502143",
+      "desc": "تواصل معنا مباشرة عبر واتساب للاستفسارات والرد السريع",
+      "btnLabel": "مراسلة واتساب",
+      "href": "https://wa.me/966536502143",
+      "className": "whatsapp"
+    },
+    {
+      "id": "instagram",
+      "icon": "instagram",
+      "title": "حساب إنستغرام",
+      "handle": "@Bunyan355",
+      "desc": "شاهد التغطيات المصورة والقصص اليومية لأعمال الصيانة الميدانية للمساجد",
+      "btnLabel": "زيارة الحساب",
+      "href": "https://instagram.com/Bunyan355",
+      "className": "instagram"
+    },
+    {
+      "id": "x",
+      "icon": "brand-x",
+      "title": "منصة إكس (تويتر)",
+      "handle": "@Bunyan355Bunyan",
+      "desc": "تابع آخر تغطياتنا اليومية وإعلانات تدشين مشاريع المساجد وصيانتها أولاً بأول",
+      "btnLabel": "زيارة الحساب",
+      "href": "https://x.com/Bunyan355Bunyan",
+      "className": "twitter"
+    },
+    {
+      "id": "email",
+      "icon": "mail",
+      "title": "البريد الإلكتروني",
+      "handle": "bunyan355@gmail.com",
+      "desc": "أرسل مقترحاتك واستفساراتك وسنقوم بالرد عليها خلال ٢٤ ساعة عمل",
+      "btnLabel": "إرسال بريد",
+      "href": "mailto:bunyan355@gmail.com",
+      "className": "email"
+    }
+  ]
+}

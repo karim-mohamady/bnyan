@@ -3,7 +3,6 @@
 import GovernanceSubLayout from '@/components/GovernanceSubLayout';
 import Icon from '@/components/Icon';
 import type { AssemblyMinute } from '@/lib/api';
-import { openDoc } from '@/utils/openDoc';
 
 export default function AssemblyMinutesClient({ assemblyMinutes }: { assemblyMinutes: AssemblyMinute[] }) {
   return (
@@ -24,16 +23,30 @@ export default function AssemblyMinutesClient({ assemblyMinutes }: { assemblyMin
               </div>
               <h3>{item.title}</h3>
               <p>{item.decisions}</p>
-              <small>عدد الحضور: <span className="num-ar">{item.attendees}</span> عضواً{item.fileUrl ? '' : ' · بيانات مؤقتة للعرض'}</small>
+              <small>عدد الحضور: <span className="num-ar">{item.attendees}</span> عضواً</small>
             </div>
-            <button
-              type="button"
-              className="gov-doc-btn"
-              onClick={() => openDoc(item.fileUrl, 'سيتوفر تحميل المحضر قريباً.')}
-            >
-              تحميل
-              <Icon name="chevron-down" width={14} height={14} />
-            </button>
+            {item.fileUrl ? (
+              <a
+                href={item.fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="gov-doc-btn"
+                style={{ textDecoration: 'none' }}
+              >
+                تحميل
+                <Icon name="chevron-down" width={14} height={14} />
+              </a>
+            ) : (
+              <span
+                className="gov-doc-btn"
+                style={{ opacity: 0.65, cursor: 'default', background: 'rgba(0,0,0,0.04)', color: '#778877' }}
+                title="المحضر معتمد ويجري رفع النسخة الإلكترونية"
+              >
+                قيد النشر
+                <Icon name="clock" width={14} height={14} />
+              </span>
+            )}
           </article>
         ))}
       </div>

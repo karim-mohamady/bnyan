@@ -6,6 +6,8 @@ import {
   financialStatements,
   assemblyMinutes,
   policiesDocs,
+  governanceDocuments,
+  governanceCategories,
 } from '@/data/governance';
 
 export async function GET() {
@@ -17,6 +19,9 @@ export async function GET() {
       financialStatements,
       assemblyMinutes,
       policies: policiesDocs,
+      policiesDocs,
+      documents: governanceDocuments,
+      categories: governanceCategories,
     },
     {
       headers: {

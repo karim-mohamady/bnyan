@@ -3,9 +3,10 @@
 import React, { useEffect } from 'react';
 import Icon from '@/components/Icon';
 import { ar } from '@/utils/ar';
+import { CONTACT } from '@/data/contact';
 
-/** المنصة الوطنية للعمل التطوعي — update if the association has a specific org page */
-const VOLUNTEER_PLATFORM_URL = 'https://nvg.gov.sa';
+/** المنصة الوطنية للعمل التطوعي */
+const VOLUNTEER_PLATFORM_URL = CONTACT.volunteerPlatformUrl || 'https://nvg.gov.sa';
 
 export default function VolunteerPage() {
   useEffect(() => {

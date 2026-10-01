@@ -6,6 +6,7 @@ import type { Project } from '@/data/projects';
 import type { NewsItem } from '@/data/news';
 import Icon from '@/components/Icon';
 import { arRegNo } from '@/utils/ar';
+import { CONTACT } from '@/data/contact';
 
 export default function HomeClient({ projects, newsItems }: { projects: Project[]; newsItems: NewsItem[] }) {
   // ── ABOUT BRIEF SLIDESHOW STATE ──
@@ -766,7 +767,7 @@ export default function HomeClient({ projects, newsItems }: { projects: Project[
                     </div>
                     <div className="qc-item__info">
                       <span>اتصل بنا</span>
-                      <strong dir="ltr" className="num-ar">+٩٦٦ ٥٣ ٦٥٠ ٢١٤٣</strong>
+                      <strong dir="ltr" className="num-ar">{CONTACT.phoneDisplay}</strong>
                     </div>
                   </div>
 
@@ -776,7 +777,7 @@ export default function HomeClient({ projects, newsItems }: { projects: Project[
                     </div>
                     <div className="qc-item__info">
                       <span>راسلنا بريدياً</span>
-                      <strong>bunyan355@gmail.com</strong>
+                      <strong>{CONTACT.email}</strong>
                     </div>
                   </div>
 
@@ -786,7 +787,7 @@ export default function HomeClient({ projects, newsItems }: { projects: Project[
                     </div>
                     <div className="qc-item__info">
                       <span>موقعنا الجغرافي</span>
-                      <strong>الخبراء، منطقة القصيم</strong>
+                      <strong>{CONTACT.addressShort}</strong>
                     </div>
                   </div>
                 </div>

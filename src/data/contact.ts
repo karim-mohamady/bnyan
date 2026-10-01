@@ -1,4 +1,39 @@
-export const CONTACT = {
+export interface ContactInfo {
+  phone: string;
+  phoneDisplay: string;
+  phoneTel: string;
+  email: string;
+  addressShort: string;
+  addressFull: string;
+  addressLine: string;
+  workingHours: string;
+  licenseNo: string;
+  unifiedNo: string;
+  mapsUrl: string;
+  whatsappUrl: string;
+  volunteerPlatformUrl?: string;
+  bank: {
+    name: string;
+    nameEn: string;
+    accountName: string;
+    iban: string;
+    ibanDisplay: string;
+  };
+  instagram: {
+    handle: string;
+    url: string;
+  };
+  x: {
+    handle: string;
+    url: string;
+  };
+  youtube: {
+    handle: string;
+    url: string;
+  };
+}
+
+export const CONTACT: ContactInfo = {
   phone: '0536502143',
   phoneDisplay: '+966 53 650 2143',
   phoneTel: '+966536502143',
@@ -11,6 +46,7 @@ export const CONTACT = {
   unifiedNo: '7051934854',
   mapsUrl: 'https://maps.app.goo.gl/tB3aC7VvD9nF6WbA9',
   whatsappUrl: 'https://wa.me/966536502143',
+  volunteerPlatformUrl: 'https://nvg.gov.sa',
   bank: {
     name: 'مصرف الراجحي',
     nameEn: 'Al Rajhi Bank',

@@ -5,27 +5,28 @@ import Link from 'next/link';
 import Icon from './Icon';
 import IbanCopy from './IbanCopy';
 import { ar, arRegNo } from '@/utils/ar';
+import { CONTACT } from '@/data/contact';
 
-const PHONE = '0536502143';
-const EMAIL = 'bunyan355@gmail.com';
-const LICENSE_NO = '1000806000';
-const UNIFIED_NO = '7051934854';
+const PHONE = CONTACT.phone;
+const EMAIL = CONTACT.email;
+const LICENSE_NO = CONTACT.licenseNo;
+const UNIFIED_NO = CONTACT.unifiedNo;
 
 const SOCIAL_LINKS = [
   {
-    href: 'https://wa.me/966536502143',
+    href: CONTACT.whatsappUrl,
     icon: 'whatsapp',
     label: 'واتساب',
     className: 'f-soc--whatsapp',
   },
   {
-    href: 'https://instagram.com/Bunyan355',
+    href: CONTACT.instagram.url,
     icon: 'instagram',
     label: 'انستقرام',
     className: 'f-soc--instagram',
   },
   {
-    href: 'https://x.com/Bunyan355Bunyan',
+    href: CONTACT.x.url,
     icon: 'brand-x',
     label: 'إكس',
     className: 'f-soc--x',

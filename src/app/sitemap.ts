@@ -1,11 +1,13 @@
 import { MetadataRoute } from 'next';
-import { newsItems } from '@/data/news';
-import { fetchProjects } from '@/lib/api';
+import { fetchProjects, fetchNews } from '@/lib/api';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://bnyan.org.sa').replace(/\/+$/, '');
   const now = new Date();
-  const projects = await fetchProjects();
+  const [projects, newsList] = await Promise.all([
+    fetchProjects(),
+    fetchNews({ page_news: true }),
+  ]);
 
   const staticRoutes = [
     '',
@@ -37,8 +39,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const newsRoutes = newsItems.map((_, index) => ({
-    url: `${baseUrl}/news/${index + 1}`,
+  const newsRoutes = newsList.map((item) => ({
+    url: `${baseUrl}/news/${item.id}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: 0.6,

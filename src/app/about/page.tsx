@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import Icon from '@/components/Icon';
 import { arRegNo } from '@/utils/ar';
 
 export default function AboutPage() {

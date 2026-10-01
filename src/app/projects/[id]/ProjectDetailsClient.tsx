@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { Project } from '@/data/projects';
-import Icon from '@/components/Icon';
 
 export default function ProjectDetailsClient({ project }: { project: Project }) {
 

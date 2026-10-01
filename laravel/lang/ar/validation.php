@@ -1,0 +1,43 @@
+<?php
+
+return [
+    'accepted' => 'يجب قبول :attribute.',
+    'active_url' => ':attribute ليس عنوان URL صحيحاً.',
+    'after' => 'يجب أن يكون :attribute تاريخاً بعد :date.',
+    'alpha' => 'يجب أن يحتوي :attribute على أحرف فقط.',
+    'boolean' => 'يجب أن تكون قيمة :attribute صواباً أو خطأ.',
+    'confirmed' => 'تأكيد :attribute غير متطابق.',
+    'date' => ':attribute ليس تاريخاً صحيحاً.',
+    'email' => 'يجب أن يكون :attribute عنوان بريد إلكتروني صحيح.',
+    'exists' => ':attribute المحدد غير صالح.',
+    'file' => 'يجب أن يكون :attribute ملفاً.',
+    'image' => 'يجب أن يكون :attribute صورة.',
+    'integer' => 'يجب أن يكون :attribute عدداً صحيحاً.',
+    'max' => [
+        'numeric' => 'يجب ألا يكون :attribute أكبر من :max.',
+        'file' => 'يجب ألا يتجاوز حجم :attribute :max كيلوبايت.',
+        'string' => 'يجب ألا يتجاوز طول :attribute :max حرفاً.',
+        'array' => 'يجب ألا يحتوي :attribute على أكثر من :max عنصر.',
+    ],
+    'mimes' => 'يجب أن يكون :attribute ملفاً من نوع: :values.',
+    'numeric' => 'يجب أن يكون :attribute رقماً.',
+    'required' => 'حقل :attribute مطلوب.',
+    'string' => 'يجب أن يكون :attribute نصاً.',
+    'unique' => 'قيمة :attribute مستخدمة بالفعل.',
+    'url' => 'صيغة الرابط :attribute غير صحيحة.',
+
+    'attributes' => [
+        'name' => 'الاسم',
+        'email' => 'البريد الإلكتروني',
+        'phone' => 'رقم الجوال',
+        'subject' => 'موضوع الرسالة',
+        'message' => 'نص الرسالة',
+        'title' => 'العنوان',
+        'description' => 'الوصف',
+        'category' => 'التصنيف',
+        'required_amount' => 'الميزانية التقديرية',
+        'collected_amount' => 'المبلغ المجموع',
+        'progress_percent' => 'نسبة الإنجاز',
+        'file' => 'الملف المرفق',
+    ],
+];
