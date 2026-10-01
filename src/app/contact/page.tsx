@@ -58,6 +58,7 @@ export default function ContactPage() {
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
@@ -87,16 +88,25 @@ export default function ContactPage() {
     if (!validate()) return;
 
     setSubmitting(true);
+    setSubmitError('');
+    setSubmitted(false);
     try {
-      await fetch('/api/v1/contact', {
+      const res = await fetch('/api/v1/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone, subject, message }),
       });
-    } catch {
-      // ignore network errors and still show confirmation
-    } finally {
-      setSubmitting(false);
+
+      if (!res.ok) {
+        // Keep what the visitor typed so nothing is lost, and tell them what happened.
+        setSubmitError(
+          res.status === 422
+            ? 'يرجى مراجعة البيانات المدخلة والمحاولة مرة أخرى.'
+            : 'تعذر إرسال الرسالة حالياً. يرجى المحاولة لاحقاً أو التواصل معنا عبر الهاتف أو واتساب.'
+        );
+        return;
+      }
+
       setSubmitted(true);
       setName('');
       setEmail('');
@@ -104,6 +114,10 @@ export default function ContactPage() {
       setSubject('');
       setMessage('');
       setErrors({});
+    } catch {
+      setSubmitError('تعذر الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -743,6 +757,7 @@ export default function ContactPage() {
                   )}
                 </button>
                 
+                {submitError && <div className="mc-err-msg" role="alert" style={{ marginTop: '10px', color: '#b42318', fontWeight: 700 }}>{submitError}</div>}
                 {submitted && <div className="mc-success-msg">✓ تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.</div>}
               </form>
             </div>
@@ -1086,6 +1101,7 @@ export default function ContactPage() {
                   )}
                 </button>
                 
+                {submitError && <div className="input-error-msg show" role="alert" style={{ marginTop: '10px', color: '#b42318', fontWeight: 700 }}>{submitError}</div>}
                 {submitted && <div className="success-msg show" id="success-msg">✓ تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.</div>}
               </form>
             </div>

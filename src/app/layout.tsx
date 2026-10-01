@@ -40,7 +40,7 @@ const notoKufiArabic = Noto_Kufi_Arabic({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://bnyan.org.sa'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bnyan.org.sa'),
   title: {
     default: "جمعية بنيان للعناية بالمساجد بالخبراء",
     template: "%s | جمعية بنيان للعناية بالمساجد",

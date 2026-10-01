@@ -1,10 +1,11 @@
 import { MetadataRoute } from 'next';
-import { projects } from '@/data/projects';
 import { newsItems } from '@/data/news';
+import { fetchProjects } from '@/lib/api';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://bnyan.org.sa';
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://bnyan.org.sa').replace(/\/+$/, '');
   const now = new Date();
+  const projects = await fetchProjects();
 
   const staticRoutes = [
     '',

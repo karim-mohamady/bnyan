@@ -1,22 +1,36 @@
 import { revalidateTag, revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
+import { timingSafeEqual } from 'crypto';
+
+function safeEqual(a: string, b: string): boolean {
+  const ab = Buffer.from(a);
+  const bb = Buffer.from(b);
+  return ab.length === bb.length && timingSafeEqual(ab, bb);
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { secret, tags, path } = body;
+    const expectedSecret = process.env.REVALIDATE_SECRET;
 
-    const expectedSecret = process.env.REVALIDATE_SECRET || 'bnyan_super_secure_revalidate_token_2026';
-    if (secret !== expectedSecret && secret !== 'bnyan_super_secure_revalidate_token_2026') {
+    // The secret is REQUIRED and must be configured in the environment.
+    // (Never hard-code it in the source code.)
+    if (!expectedSecret) {
+      return NextResponse.json({ message: 'REVALIDATE_SECRET is not configured' }, { status: 503 });
+    }
+
+    const body = await request.json();
+    const { secret, tags, path } = body ?? {};
+
+    if (typeof secret !== 'string' || !safeEqual(secret, expectedSecret)) {
       return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
     }
 
     if (Array.isArray(tags)) {
       for (const tag of tags) {
+        if (typeof tag !== 'string') continue;
         try {
-          // In Next.js 16+, revalidateTag takes a tag and profile or cache options
-          // Use 'default' or { expire: 0 } as supported profile config
-          (revalidateTag as unknown as (t: string, p?: unknown) => void)(tag, 'default');
+          // Next.js 16: revalidateTag(tag, profile). 'max' = stale-while-revalidate.
+          (revalidateTag as unknown as (t: string, p?: unknown) => void)(tag, 'max');
         } catch {
           // ignore tag format errors
         }

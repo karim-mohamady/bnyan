@@ -1,12 +1,13 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://bnyan.org.sa').replace(/\/+$/, '');
   return {
     rules: {
       userAgent: '*',
       allow: '/',
       disallow: ['/api/'],
     },
-    sitemap: 'https://bnyan.org.sa/sitemap.xml',
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
