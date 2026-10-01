@@ -42,9 +42,9 @@ export default function AnnualReportClient({ annualReports }: { annualReports: A
               <span
                 className="gov-doc-btn"
                 style={{ opacity: 0.65, cursor: 'default', background: 'rgba(0,0,0,0.04)', color: '#778877' }}
-                title="التقرير معتمد ويجري رفع النسخة الإلكترونية"
+                title="التقرير معتمد رسمياً — النسخة الإلكترونية غير مرفوعة حالياً"
               >
-                قيد النشر
+                غير متوفر للتحميل
                 <Icon name="clock" width={14} height={14} />
               </span>
             )}

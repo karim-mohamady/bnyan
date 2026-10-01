@@ -11,6 +11,8 @@ export default function DonatePage() {
   const [customAmountText, setCustomAmountText] = useState('200');
   const [paymentMethod, setPaymentMethod] = useState<'bank' | 'mada' | 'card' | 'applepay'>('bank');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [amountError, setAmountError] = useState('');
+  const [methodNotice, setMethodNotice] = useState('');
 
   // Scroll reveals intersection observer
   useEffect(() => {
@@ -55,9 +57,10 @@ export default function DonatePage() {
     if (step === 3 && currentStep === 2) {
       const amt = parseFloat(customAmountText);
       if (isNaN(amt) || amt <= 0) {
-        alert('الرجاء إدخال مبلغ تبرع صحيح');
+        setAmountError('الرجاء إدخال مبلغ تبرع صحيح أكبر من صفر');
         return;
       }
+      setAmountError('');
       setDonateAmount(amt);
     }
     
@@ -75,6 +78,7 @@ export default function DonatePage() {
   };
 
   const handlePresetSelect = (val: number) => {
+    setAmountError('');
     setDonateAmount(val);
     setCustomAmountText(String(val));
   };
@@ -82,6 +86,7 @@ export default function DonatePage() {
   const handleCustomAmountInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setCustomAmountText(val);
+    setAmountError('');
     const parsed = parseFloat(val);
     if (!isNaN(parsed) && parsed > 0) {
       setDonateAmount(parsed);
@@ -90,9 +95,10 @@ export default function DonatePage() {
 
   const handlePayMethodSelect = (method: typeof paymentMethod) => {
     if (method !== 'bank') {
-      alert('طريقة الدفع هذه ستتوفر قريباً بعد تفعيل البوابة.');
+      setMethodNotice('بوابة الدفع الإلكتروني قيد التفعيل المصرفي. يرجى إتمام المساهمة عبر التحويل البنكي المباشر بحساب الجمعية الرسمي أدناه.');
       return;
     }
+    setMethodNotice('');
     setPaymentMethod(method);
   };
 
@@ -294,6 +300,11 @@ export default function DonatePage() {
                       />
                       <span className="custom-amt-prefix">ر.س</span>
                     </div>
+                    {amountError && (
+                      <div role="alert" style={{ color: '#b42318', fontSize: '13px', marginTop: '8px', fontWeight: 700 }}>
+                        {amountError}
+                      </div>
+                    )}
                   </div>
 
                   <div className="wizard-actions">
@@ -377,6 +388,13 @@ export default function DonatePage() {
                       <div className="pay-method-check"></div>
                     </div>
                   </div>
+
+                  {methodNotice && (
+                    <div role="status" style={{ background: '#eef6fc', border: '1px solid #c9e2f8', borderRadius: '12px', padding: '12px 16px', color: '#104e7a', fontSize: '13px', fontWeight: 600, margin: '16px 0' }}>
+                      <i className="fa-solid fa-circle-info" style={{ marginLeft: '8px' }}></i>
+                      {methodNotice}
+                    </div>
+                  )}
 
                   {/* Bank card details */}
                   <div id="bank-transfer-details" className="premium-bank-card">

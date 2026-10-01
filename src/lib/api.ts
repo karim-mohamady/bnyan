@@ -58,7 +58,10 @@ export interface SiteSettings extends ContactInfo {
 }
 
 /** Base URL of the Laravel API, e.g. https://api.example.com/api/v1 (empty = static mode). */
-const API_BASE = (process.env.LARAVEL_API_URL || process.env.NEXT_PUBLIC_API_URL || '').replace(/\/+$/, '');
+const rawApi = process.env.LARAVEL_API_URL || process.env.NEXT_PUBLIC_API_URL || '';
+const API_BASE = (rawApi.startsWith('http://') || rawApi.startsWith('https://'))
+  ? rawApi.replace(/\/+$/, '')
+  : '';
 
 async function getJson(path: string, tags: string[]): Promise<unknown | null> {
   if (!API_BASE) return null;

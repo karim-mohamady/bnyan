@@ -30,7 +30,7 @@ Route::get('/', function () {
 });
 
 // Admin Dashboard Secret Route Group
-$adminPath = env('ADMIN_PATH', 'panel-8f3k2x9dq7');
+$adminPath = config('admin.path', env('ADMIN_PATH', 'panel-8f3k2x9dq7'));
 
 Route::prefix($adminPath)->middleware('admin.access')->group(function () {
     // 1. Dashboard Overview

@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const API_BASE = (process.env.LARAVEL_API_URL || process.env.NEXT_PUBLIC_API_URL || '').replace(/\/+$/, '');
+const rawApi = process.env.LARAVEL_API_URL || process.env.NEXT_PUBLIC_API_URL || '';
+const API_BASE = (rawApi.startsWith('http://') || rawApi.startsWith('https://'))
+  ? rawApi.replace(/\/+$/, '')
+  : '';
 
 export async function POST(request: NextRequest) {
   let body: Record<string, unknown>;

@@ -42,9 +42,9 @@ export default function FinancialsClient({ financialStatements }: { financialSta
               <span
                 className="gov-doc-btn"
                 style={{ opacity: 0.65, cursor: 'default', background: 'rgba(0,0,0,0.04)', color: '#778877' }}
-                title="القوائم معتمدة ويجري رفع النسخة الإلكترونية"
+                title="القوائم معتمدة رسمياً — النسخة الإلكترونية غير مرفوعة حالياً"
               >
-                قيد النشر
+                غير متوفر للتحميل
                 <Icon name="clock" width={14} height={14} />
               </span>
             )}
