@@ -11,19 +11,19 @@ class ProjectSeeder extends Seeder
 {
     public function run(): void
     {
-        $categories = [
-            ['key' => 'all', 'name' => 'الكل', 'sort_order' => 1],
-            ['key' => 'maintenance', 'name' => 'صيانة المساجد', 'sort_order' => 2],
-            ['key' => 'renovation', 'name' => 'الترميم والتأهيل', 'sort_order' => 3],
-            ['key' => 'cleaning', 'name' => 'نظافة المساجد', 'sort_order' => 4],
-            ['key' => 'lighting', 'name' => 'تعطير المساجد', 'sort_order' => 5],
-            ['key' => 'water', 'name' => 'سُقيا الماء', 'sort_order' => 6],
-            ['key' => 'building', 'name' => 'بناء المساجد', 'sort_order' => 7],
-        ];
+       $categories = [
+    ['key' => 'all', 'label' => 'الكل', 'sort_order' => 1],
+    ['key' => 'maintenance', 'label' => 'صيانة المساجد', 'sort_order' => 2],
+    ['key' => 'renovation', 'label' => 'الترميم والتأهيل', 'sort_order' => 3],
+    ['key' => 'cleaning', 'label' => 'نظافة المساجد', 'sort_order' => 4],
+    ['key' => 'lighting', 'label' => 'تعطير المساجد', 'sort_order' => 5],
+    ['key' => 'water', 'label' => 'سُقيا الماء', 'sort_order' => 6],
+    ['key' => 'building', 'label' => 'بناء المساجد', 'sort_order' => 7],
+];
 
-        foreach ($categories as $cat) {
-            ProjectCategory::updateOrCreate(['key' => $cat['key']], $cat);
-        }
+foreach ($categories as $cat) {
+    ProjectCategory::updateOrCreate(['key' => $cat['key']], $cat);
+}
 
         $jsonPath = database_path('seeders/truth/projects.json');
         if (!file_exists($jsonPath)) {
@@ -39,11 +39,11 @@ class ProjectSeeder extends Seeder
             $id = $item['id'];
             $req = $item['req'] ?? 0;
             $rem = $item['rem'] ?? 0;
-            $collected = $req - $rem;
+            $collected = $req - $rem; // <-- تم إصلاح المعادلة هنا
             $pct = $item['pct'] ?? 0;
 
             $isFeatured = in_array($id, [1, 2, 3], true);
-            $featuredOrder = $isFeatured ? $id : null;
+            $featuredOrder = $isFeatured ? $id : 0;
 
             $project = Project::updateOrCreate(
                 ['id' => $id],

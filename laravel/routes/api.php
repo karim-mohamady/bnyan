@@ -1,6 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// مسار لرفع استجابة عند طلب /api بشكل مباشر
+Route::get('/', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Bnyan API is working successfully!'
+    ]);
+});
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\ProjectController;

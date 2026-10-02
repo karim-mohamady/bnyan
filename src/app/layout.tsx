@@ -77,7 +77,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={notoKufiArabic.variable} suppressHydrationWarning>
+    <html 
+      lang="ar" 
+      dir="rtl" 
+      data-scroll-behavior="smooth" 
+      className={`${notoKufiArabic.variable} overflow-x-hidden w-full`} 
+      suppressHydrationWarning
+    >
       <head>
         <link 
           rel="stylesheet" 
@@ -87,9 +93,15 @@ export default function RootLayout({
           referrerPolicy="no-referrer" 
         />
       </head>
-      <body style={{ fontFamily: "var(--font-noto-kufi), sans-serif" }} suppressHydrationWarning>
+      <body 
+        className="overflow-x-hidden w-full min-h-screen relative" 
+        style={{ fontFamily: "var(--font-noto-kufi), sans-serif" }} 
+        suppressHydrationWarning
+      >
         <Header />
-        {children}
+        <main className="w-full overflow-x-hidden">
+          {children}
+        </main>
         <Footer />
         <FloatActions />
       </body>
