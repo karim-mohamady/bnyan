@@ -40,7 +40,7 @@ const notoKufiArabic = Noto_Kufi_Arabic({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bnyan.org.sa'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bunyankh.org.sa'),
   title: {
     default: "جمعية بنيان للعناية بالمساجد بالخبراء",
     template: "%s | جمعية بنيان للعناية بالمساجد",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "جمعية بنيان للعناية بالمساجد بالخبراء",
     description: "جمعية أهلية غير ربحية متخصصة في صيانة وترميم المساجد بمحافظة الخبراء، مرخصة من المركز الوطني لتنمية القطاع غير الربحي.",
-    url: "https://bnyan.org.sa",
+    url: "https://bunyankh.org.sa",
     siteName: "جمعية بنيان للعناية بالمساجد بالخبراء",
     locale: "ar_SA",
     type: "website",
