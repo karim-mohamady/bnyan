@@ -68,7 +68,8 @@ async function getJson(path: string, tags: string[]): Promise<unknown | null> {
   try {
     const res = await fetch(`${API_BASE}${path}`, {
       headers: { Accept: 'application/json' },
-      next: { tags, revalidate: 60 },
+      // تم تغيير التخزين إلى no-store لقراءة البيانات مباشرة وبدون كاش
+      cache: 'no-store',
       signal: AbortSignal.timeout(4000),
     });
     if (!res.ok) {
