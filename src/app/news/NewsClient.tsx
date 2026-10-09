@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import type { NewsArticle } from '@/lib/api';
-
+export const dynamic = 'force-dynamic';
 export default function NewsClient({ initialNews }: { initialNews: NewsArticle[] }) {
   const isClient = React.useSyncExternalStore(
     (onStoreChange) => {

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import GovernanceSubLayout from '@/components/GovernanceSubLayout';
 import Icon from '@/components/Icon';
 import type { BoardMember } from '@/lib/api';
-
+export const dynamic = 'force-dynamic';
 export default function BoardMembersGovClient({ boardMembersList }: { boardMembersList: (Pick<BoardMember, 'name' | 'desc' | 'featured'> & { role: string })[] }) {
   const president = boardMembersList.find((m) => m.featured);
   const rest = boardMembersList.filter((m) => !m.featured);

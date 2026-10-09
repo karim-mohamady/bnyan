@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import type { Project } from '@/data/projects';
-
+export const dynamic = 'force-dynamic';
 export default function ProjectsClient({ projects }: { projects: Project[] }) {
   const [filter, setFilter] = useState<'all' | 'maintenance' | 'renovation' | 'cleaning' | 'lighting' | 'water' | 'building'>('all');
 

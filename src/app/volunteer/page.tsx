@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import Icon from '@/components/Icon';
 import { ar } from '@/utils/ar';
 import { CONTACT } from '@/data/contact';
-
+export const dynamic = 'force-dynamic';
 /** المنصة الوطنية للعمل التطوعي */
 const VOLUNTEER_PLATFORM_URL = CONTACT.volunteerPlatformUrl || 'https://nvg.gov.sa';
 

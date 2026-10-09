@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { Project } from '@/data/projects';
-
+export const dynamic = 'force-dynamic';
 export default function ProjectDetailsClient({ project }: { project: Project }) {
 
   // Compile all media list (images first, then videos)

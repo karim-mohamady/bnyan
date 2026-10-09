@@ -7,7 +7,7 @@ import type { NewsItem } from '@/data/news';
 import Icon from '@/components/Icon';
 import { arRegNo } from '@/utils/ar';
 import { CONTACT } from '@/data/contact';
-
+export const dynamic = 'force-dynamic';
 export default function HomeClient({ projects, newsItems }: { projects: Project[]; newsItems: NewsItem[] }) {
   // ── ABOUT BRIEF SLIDESHOW STATE ──
   const [aboutIsAlt, setAboutIsAlt] = useState(false);

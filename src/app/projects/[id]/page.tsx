@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { fetchProject } from '@/lib/api';
 import ProjectDetailsClient from './ProjectDetailsClient';
-
+export const dynamic = 'force-dynamic';
 interface PageProps {
   params: Promise<{ id: string }>;
 }

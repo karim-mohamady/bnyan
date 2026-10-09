@@ -1,5 +1,5 @@
 'use client';
-
+export const dynamic = 'force-dynamic';
 import React, { useCallback, useState } from 'react';
 import Icon from '@/components/Icon';
 import { CONTACT } from '@/data/contact';

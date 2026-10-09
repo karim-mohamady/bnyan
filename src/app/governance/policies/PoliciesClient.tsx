@@ -3,7 +3,7 @@
 import GovernanceSubLayout from '@/components/GovernanceSubLayout';
 import Icon from '@/components/Icon';
 import type { PolicyDoc } from '@/lib/api';
-
+export const dynamic = 'force-dynamic';
 export default function PoliciesClient({ policiesDocs }: { policiesDocs: PolicyDoc[] }) {
   return (
     <GovernanceSubLayout

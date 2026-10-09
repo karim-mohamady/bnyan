@@ -1,5 +1,5 @@
 import React from 'react';
-
+export const dynamic = 'force-dynamic';
 interface MosqueIllustrationProps {
   color?: 'moss' | 'sand' | 'sage' | 'earth';
   className?: string;

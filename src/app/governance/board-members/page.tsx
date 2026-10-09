@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { fetchBoardMembers } from '@/lib/api';
 import BoardMembersGovClient from './BoardMembersGovClient';
-
+export const dynamic = 'force-dynamic';
 export const metadata: Metadata = { title: 'أعضاء مجلس الإدارة' };
 
 export default async function BoardMembersGovPage() {

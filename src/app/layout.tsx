@@ -3,7 +3,7 @@ import { Noto_Kufi_Arabic } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatActions from "@/components/FloatActions";
-
+export const dynamic = 'force-dynamic';
 // Import stylesheets in correct sequence to preserve CSS cascade rules
 import "@/styles/base.css";
 import "@/styles/header.css";

@@ -3,7 +3,7 @@
 import GovernanceSubLayout from '@/components/GovernanceSubLayout';
 import Icon from '@/components/Icon';
 import type { AssemblyMinute } from '@/lib/api';
-
+export const dynamic = 'force-dynamic';
 export default function AssemblyMinutesClient({ assemblyMinutes }: { assemblyMinutes: AssemblyMinute[] }) {
   return (
     <GovernanceSubLayout

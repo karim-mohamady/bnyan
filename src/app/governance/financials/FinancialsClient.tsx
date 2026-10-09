@@ -4,7 +4,7 @@ import GovernanceSubLayout from '@/components/GovernanceSubLayout';
 import Icon from '@/components/Icon';
 import type { FinancialStatement } from '@/lib/api';
 import { ar } from '@/utils/ar';
-
+export const dynamic = 'force-dynamic';
 export default function FinancialsClient({ financialStatements }: { financialStatements: FinancialStatement[] }) {
   return (
     <GovernanceSubLayout

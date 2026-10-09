@@ -4,7 +4,7 @@ import GovernanceSubLayout from '@/components/GovernanceSubLayout';
 import Icon from '@/components/Icon';
 import type { AssemblyMember } from '@/lib/api';
 import { ar } from '@/utils/ar';
-
+export const dynamic = 'force-dynamic';
 export default function AssemblyMembersClient({ assemblyMembers }: { assemblyMembers: AssemblyMember[] }) {
   return (
     <GovernanceSubLayout

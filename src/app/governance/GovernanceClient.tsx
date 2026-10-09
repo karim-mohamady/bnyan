@@ -6,7 +6,7 @@ import Icon from '@/components/Icon';
 import { ar, arRegNo } from '@/utils/ar';
 import { GOVERNANCE_SUBMENU } from '@/data/governance';
 import type { GovernanceData, GovernanceDocumentItem } from '@/lib/api';
-
+export const dynamic = 'force-dynamic';
 export default function GovernanceClient({ data }: { data: GovernanceData }) {
   useEffect(() => {
     const io = new IntersectionObserver(

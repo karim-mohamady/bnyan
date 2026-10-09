@@ -1,5 +1,5 @@
 import React from 'react';
-
+export const dynamic = 'force-dynamic';
 interface IconProps {
   name: string;
   width?: number | string;

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { fetchProjects } from '@/lib/api';
 import ProjectsClient from './ProjectsClient';
-
+export const dynamic = 'force-dynamic';
 export const metadata: Metadata = { title: 'المشاريع' };
 
 export default async function ProjectsPage() {

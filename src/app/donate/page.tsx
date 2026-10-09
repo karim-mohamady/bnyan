@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '@/components/Icon';
 import IbanCopy from '@/components/IbanCopy';
-
+export const dynamic = 'force-dynamic';
 export default function DonatePage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedProject, setSelectedProject] = useState('عام — أينما يكون الأحوج');
