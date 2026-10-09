@@ -185,5 +185,12 @@ export async function fetchSettings(): Promise<SiteSettings> {
 
 export async function fetchContent(page: string): Promise<Record<string, unknown> | null> {
   const json = await getJson(`/content/${page}`, [`content_${page}`]);
-  return isRecord(json) ? json : null;
+  if (isRecord(json)) {
+    // إذا كان Laravel يرسل البيانات داخل data
+    if (isRecord(json.data)) {
+      return json.data;
+    }
+    return json;
+  }
+  return null;
 }
