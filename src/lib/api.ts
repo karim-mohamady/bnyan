@@ -183,16 +183,23 @@ export async function fetchSettings(): Promise<SiteSettings> {
   };
 }
 export async function fetchContent(page: string): Promise<Record<string, unknown> | null> {
-  const json = await getJson(`/content?page=${page}`, [`content_${page}`]);
-  
+  // 1. المحاولة الأولى: طلب المسار المباشر المعتمد في Laravel (/content/about)
+  let json = await getJson(`/content/${page}`, [`content_${page}`]);
+
+  // 2. المحاولة الثانية: إذا رجع المسار الأول null أو 404، نجرب المسار مع Query Parameter
+  if (!json) {
+    json = await getJson(`/content?page=${page}`, [`content_${page}`]);
+  }
+
+  // 3. فك تغليف البيانات واستخراج الكائن الصحيح
   if (isRecord(json)) {
     if (isRecord(json.data)) {
       return json.data;
     }
     return json;
   }
-  
-  // تحويل مزدوج لتجاوز خطأ TypeScript (SiteSettings -> unknown -> Record)
+
+  // 4. خط الدفاع الأخير: فحص ما إذا كانت بيانات الصفحة موجودة داخل /settings
   const settings = (await fetchSettings()) as unknown as Record<string, unknown>;
   if (settings && isRecord(settings[page])) {
     return settings[page] as Record<string, unknown>;
