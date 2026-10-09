@@ -9,11 +9,23 @@ class NewsResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        $gallery = array_map(function ($item) {
-            $src = is_array($item) ? ($item['src'] ?? '') : (string) $item;
-            return str_starts_with($src, 'http') ? $src : url('storage/' . ltrim($src, '/'));
-        }, $this->gallery ?? []);
+               $gallery = collect($this->gallery ?? [])
+            ->map(function ($item) {
+                $src = is_array($item)
+                    ? ($item['url'] ?? $item['src'] ?? $item['path'] ?? '')
+                    : (string) $item;
 
+                if ($src === '') {
+                    return null;
+                }
+
+                return str_starts_with($src, 'http')
+                    ? $src
+                    : url('storage/' . ltrim($src, '/'));
+            })
+            ->filter()
+            ->values()
+            ->all();
         $cover = $this->cover_image ? (str_starts_with($this->cover_image, 'http') ? $this->cover_image : url('storage/' . ltrim($this->cover_image, '/'))) : null;
         $showcase = $this->showcase_image ? [
             'src' => str_starts_with($this->showcase_image, 'http') ? $this->showcase_image : url('storage/' . ltrim($this->showcase_image, '/')),
