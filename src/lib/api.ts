@@ -182,15 +182,21 @@ export async function fetchSettings(): Promise<SiteSettings> {
     copyrightText: 'جميع الحقوق محفوظة لجمعية بنيان للعناية بالمساجد بالخبراء © 2026',
   };
 }
-
 export async function fetchContent(page: string): Promise<Record<string, unknown> | null> {
-  const json = await getJson(`/content/${page}`, [`content_${page}`]);
+  const json = await getJson(`/content?page=${page}`, [`content_${page}`]);
+  
   if (isRecord(json)) {
-    // إذا كان Laravel يرسل البيانات داخل data
     if (isRecord(json.data)) {
       return json.data;
     }
     return json;
   }
+  
+  // تحويل مزدوج لتجاوز خطأ TypeScript (SiteSettings -> unknown -> Record)
+  const settings = (await fetchSettings()) as unknown as Record<string, unknown>;
+  if (settings && isRecord(settings[page])) {
+    return settings[page] as Record<string, unknown>;
+  }
+
   return null;
 }
