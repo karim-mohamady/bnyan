@@ -6,6 +6,18 @@ import IbanCopy from '@/components/IbanCopy';
 import { CONTACT, SOCIAL_PLATFORMS } from '@/data/contact';
 import { arRegNo } from '@/utils/ar';
 
+// ── NUMERAL CONVERSION HELPER ──
+const ar = (n: string | number) => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[Number(d)]);
+
+// ── PHONE FORMATTER (keeps Arabic-Indic digits, fixes bidi ordering) ──
+// الأرقام العربية (٠-٩) داخل نص RTL تتبدل مجموعاتها بسبب المسافات والشرطات.
+// نعزل الرقم (LRI ... PDI) ونضع علامة LRM حول كل مسافة/شرطة حتى يبقى الترتيب والتنسيق كما هو.
+const LRM = '\u200E';
+const phoneLtr = (n: string | number) =>
+  '\u2066' + LRM + ar(n).replace(/([\s\-])/g, `${LRM}$1${LRM}`) + LRM + '\u2069';
+
+const phoneStyle: React.CSSProperties = { direction: 'ltr', unicodeBidi: 'isolate', textAlign: 'start' };
+
 export default function ContactPage() {
   const isClient = React.useSyncExternalStore(
     (onStoreChange) => {
@@ -146,9 +158,6 @@ export default function ContactPage() {
       a: 'ملاحظاتكم ومقترحاتكم تثري أعمالنا؛ يرجى ملء نموذج الاتصال وكتابة تفاصيل الاقتراح أو الشكوى بوضوع وسيحال الموضوع للقسم الإداري المختص لمتابعته والتواصل معك.'
     }
   ];
-
-  // ── NUMERAL CONVERSION HELPER ──
-  const ar = (n: string | number) => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[Number(d)]);
 
   const [copiedPhone, setCopiedPhone] = useState(false);
 
@@ -583,7 +592,7 @@ export default function ContactPage() {
               </div>
               <div className="mc-info-details">
                 <span className="mc-info-lbl">الجوال / واتساب</span>
-                <span className="mc-info-val" dir="ltr">{copiedPhone ? 'تم النسخ' : ar(CONTACT.phoneDisplay)}</span>
+                <span className="mc-info-val" dir="ltr" style={phoneStyle}>{copiedPhone ? 'تم النسخ' : phoneLtr(CONTACT.phoneDisplay)}</span>
               </div>
               <Icon name="chevron-left" width={10} height={10} style={{ color: '#ccc' }} />
             </button>
@@ -594,7 +603,7 @@ export default function ContactPage() {
               </div>
               <div className="mc-info-details">
                 <span className="mc-info-lbl">واتساب</span>
-                <span className="mc-info-val" dir="ltr">{ar(CONTACT.phone)}</span>
+                <span className="mc-info-val" dir="ltr" style={phoneStyle}>{phoneLtr(CONTACT.phone)}</span>
               </div>
               <Icon name="chevron-left" width={10} height={10} style={{ color: '#ccc' }} />
             </a>
@@ -776,7 +785,7 @@ export default function ContactPage() {
                 const isActive = activeFaq === idx;
                 return (
                   <div className={`mc-faq-item ${isActive ? 'active' : ''}`} key={idx}>
-                    <button className="mc-faq-q" onClick={() => toggleFaq(idx)}>
+                    <button type="button" className="mc-faq-q" aria-expanded={isActive} onClick={() => toggleFaq(idx)}>
                       <span className="mc-faq-q-text">{faq.q}</span>
                       <div className="mc-faq-icon">
                         <i className="fa-solid fa-chevron-down"></i>
@@ -844,7 +853,7 @@ export default function ContactPage() {
               <h5><i className="fa-solid fa-location-dot"></i> جمعية بنيان بالخبراء</h5>
               <p className="loc-desc">{CONTACT.addressFull}</p>
               <p className="loc-desc" style={{ marginTop: '6px' }}>{CONTACT.addressLine}</p>
-              <p className="loc-desc" style={{ marginTop: '8px' }} dir="ltr">{CONTACT.email} · {ar(CONTACT.phoneDisplay)}</p>
+              <p className="loc-desc" style={{ marginTop: '8px', ...phoneStyle }} dir="ltr">{CONTACT.email} · {phoneLtr(CONTACT.phoneDisplay)}</p>
               <a href={CONTACT.mapsUrl} target="_blank" rel="noopener noreferrer" className="mc-map-btn">
                 <i className="fa-solid fa-map-location-dot" style={{ marginLeft: '6px' }}></i>
                 <span>فتح في خرائط Google</span>
@@ -915,7 +924,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <p>اضغط لنسخ الرقم أو تواصل معنا مباشرة عبر الجوال وواتساب</p>
-              <span className="val num-ar" dir="ltr">{copiedPhone ? 'تم النسخ ✓' : ar(CONTACT.phoneDisplay)}</span>
+              <span className="val num-ar" dir="ltr" style={phoneStyle}>{copiedPhone ? 'تم النسخ ✓' : phoneLtr(CONTACT.phoneDisplay)}</span>
             </button>
 
             <a href={CONTACT.whatsappUrl} className="contact-card" target="_blank" rel="noopener noreferrer">
@@ -929,7 +938,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <p>راسلنا على واتساب للرد السريع على استفساراتكم</p>
-              <span className="val num-ar" dir="ltr">{ar(CONTACT.phone)}</span>
+              <span className="val num-ar" dir="ltr" style={phoneStyle}>{phoneLtr(CONTACT.phone)}</span>
             </a>
 
             <a href={`mailto:${CONTACT.email}`} className="contact-card">
@@ -1115,18 +1124,35 @@ export default function ContactPage() {
                 {faqs.map((faq, idx) => {
                   const isActive = activeFaq === idx;
                   return (
-                    <div className="faq-item" key={idx}>
-                      <button className="faq-question" onClick={() => toggleFaq(idx)}>
+                    <div className={`faq-item${isActive ? ' active open' : ''}`} key={idx}>
+                      <button
+                        type="button"
+                        className="faq-question"
+                        aria-expanded={isActive}
+                        onClick={() => toggleFaq(idx)}
+                      >
                         <span className="faq-question-text">{faq.q}</span>
                         <div className="faq-icon" style={{ transform: isActive ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s' }}>
                           <i className="fa-solid fa-chevron-down"></i>
                         </div>
                       </button>
-                      <div className="faq-answer" style={{ height: isActive ? 'auto' : 0, overflow: 'hidden', display: isActive ? 'block' : 'none' }}>
-                        <div className="faq-answer-inner">
-                          {faq.a}
+                      {isActive && (
+                        <div
+                          className="faq-answer"
+                          style={{
+                            display: 'block',
+                            height: 'auto',
+                            maxHeight: 'none',
+                            opacity: 1,
+                            visibility: 'visible',
+                            overflow: 'visible',
+                          }}
+                        >
+                          <div className="faq-answer-inner">
+                            {faq.a}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   );
                 })}
@@ -1184,7 +1210,7 @@ export default function ContactPage() {
               <h5><i className="fa-solid fa-location-dot"></i> جمعية بنيان بالخبراء</h5>
               <p className="loc-desc">{CONTACT.addressFull}</p>
               <p className="loc-desc" style={{ marginTop: '6px', fontSize: '12.5px' }}>{CONTACT.addressLine}</p>
-              <p className="loc-desc" style={{ marginTop: '8px' }} dir="ltr">{CONTACT.email} · {ar(CONTACT.phoneDisplay)}</p>
+              <p className="loc-desc" style={{ marginTop: '8px', ...phoneStyle }} dir="ltr">{CONTACT.email} · {phoneLtr(CONTACT.phoneDisplay)}</p>
               <a href={CONTACT.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn-map-link">
                 <i className="fa-solid fa-map-location-dot" style={{ marginLeft: '6px' }}></i>
                 <span>فتح في خرائط Google</span>
