@@ -12,6 +12,19 @@ const EMAIL = CONTACT.email;
 const LICENSE_NO = CONTACT.licenseNo;
 const UNIFIED_NO = CONTACT.unifiedNo;
 
+/** LRM: علامة اتجاه غير مرئية تثبّت ترتيب الأجزاء داخل النص العربي */
+const LRM = '\u200E';
+
+/** +٩٦٦ ٥٣ ٦٥٠ ٢١٤٣ — بالصيغة الدولية وبترتيب ثابت */
+const PHONE_DISPLAY = [
+  `+${ar('966')}`,
+  ar('53'),
+  ar('650'),
+  ar('2143'),
+]
+  .map((part) => `${LRM}${part}${LRM}`)
+  .join(' ');
+
 const SOCIAL_LINKS = [
   {
     href: CONTACT.whatsappUrl,
@@ -78,24 +91,32 @@ function CopyButton({
       type="button"
       className={`footer-copy-btn ${className} ${copied ? 'copied' : ''}`}
       onClick={handleCopy}
-      aria-label={copied ? 'تم النسخ' : `نسخ ${display}`}
+      aria-label={copied ? 'تم النسخ' : `نسخ ${value}`}
     >
       <span className="footer-copy-btn__icon">
         <Icon name={copied ? 'check' : icon} width={16} height={16} />
       </span>
       <span className="footer-copy-btn__text">
-        <span className="footer-copy-btn__value num-ar">{display}</span>
+        <span
+          dir="ltr"
+          className="footer-copy-btn__value num-ar"
+          style={{
+            display: 'block',
+            direction: 'ltr',
+            unicodeBidi: 'isolate',
+            whiteSpace: 'nowrap',
+            textAlign: 'right',
+          }}
+        >
+          {display}
+        </span>
         <small>{copied ? 'تم النسخ' : hint ?? 'اضغط للنسخ'}</small>
       </span>
     </button>
   );
 }
 
-/** عزل النص (رقم / إيميل) ليظهر LTR صحيح داخل سياق عربي */
-const isolateLtr = (value: string): string => `\u2066${value}\u2069`;
-
 export default function Footer() {
-  const phoneDisplay = isolateLtr(ar('053 650 2143'));
   const [copiedLicense, setCopiedLicense] = useState(false);
   const [copiedUnified, setCopiedUnified] = useState(false);
 
@@ -190,7 +211,7 @@ export default function Footer() {
               <li>
                 <CopyButton
                   value={PHONE}
-                  display={phoneDisplay}
+                  display={PHONE_DISPLAY}
                   icon="phone"
                   hint="اضغط لنسخ الرقم"
                 />
