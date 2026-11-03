@@ -209,9 +209,9 @@ export default function HomeClient({ projects, newsItems }: { projects: Project[
             const eased = 1 - Math.pow(1 - t, 3);
             
             setImpactValues({
-              carpet: Math.round(eased * 504),
-              ac: Math.round(eased * 212),
-              water: Math.round(eased * 2160),
+              carpet: Math.round(eased * 901),
+              ac: Math.round(eased * 475),
+              water: Math.round(eased * 5760),
               beneficiaries: Math.round(eased * 15000)
             });
 
@@ -619,7 +619,7 @@ export default function HomeClient({ projects, newsItems }: { projects: Project[
               </div>
             </div>
             
-            <p className="impact__note reveal-block">بيانات مرفوعة لجمعية الدعوة والإرشاد وتوعية الجاليات بمنطقة القصيم · إجمالي التبرعات للفترة: <span className="num-ar">{ar("17٬689")}</span> ريال</p>
+            <p className="impact__note reveal-block">بيانات مرفوعة لجمعية الدعوة والإرشاد وتوعية الجاليات بمنطقة القصيم · إجمالي التبرعات للفترة: <span className="num-ar">{ar("170٬689")}</span> ريال</p>
           </div>
         </section>
 
