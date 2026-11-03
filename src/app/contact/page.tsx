@@ -636,7 +636,7 @@ export default function ContactPage() {
               </div>
               <div className="mc-info-details">
                 <span className="mc-info-lbl">أوقات العمل</span>
-                <span className="mc-info-val">من الأحد للخميس: {ar('8')} ص - {ar('4')} م</span>
+                <span className="mc-info-val">من الأحد للخميس: {ar('8')} ص - {ar('12')} م</span>
               </div>
             </div>
 
@@ -980,7 +980,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <p>أوقات المراجعة المعتمدة واستقبال الزوار والتقارير بمقر الجمعية</p>
-              <span className="val">من الأحد إلى الخميس: {ar('8')} ص - {ar('4')} م</span>
+              <span className="val">من الأحد إلى الخميس: {ar('8')} ص - {ar('12')} م</span>
             </div>
 
             <div className="contact-card contact-card--official">
