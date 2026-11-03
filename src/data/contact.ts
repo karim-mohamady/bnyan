@@ -41,7 +41,7 @@ export const CONTACT: ContactInfo = {
   addressShort: 'القصيم · الخبراء · طريق الملك فهد',
   addressFull: 'حي المرقب، الخبراء، منطقة القصيم، المملكة العربية السعودية',
   addressLine: 'القصيم - الخبراء - طريق الملك فهد',
-  workingHours: 'من الأحد إلى الخميس: 8 ص - 4 م',
+  workingHours: 'من الأحد إلى الخميس: 8 ص - 12 م',
   licenseNo: '1000806000',
   unifiedNo: '7051934854',
   mapsUrl: 'https://maps.app.goo.gl/tB3aC7VvD9nF6WbA9',
