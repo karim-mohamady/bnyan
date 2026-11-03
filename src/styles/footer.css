@@ -51,6 +51,24 @@ footer{background:var(--green-deep);color:#fff;padding:64px 0 0}
 .footer-iban .iban-block__btn{padding:10px 12px;border-radius:10px}
 .footer-iban .iban-block__value{font-size:clamp(11px,2.8vw,12.5px)}
 
+/* ── BiDi: عزل الأرقام ليظهر الرقم بترتيبه الصحيح داخل النص العربي ── */
+.footer-copy-btn__value,
+.footer-reg__num,
+.footer-iban .iban-block__value,
+.footer-contact__link [dir="ltr"],
+.num-ar{
+  direction:ltr;
+  unicode-bidi:isolate;
+  white-space:nowrap;
+}
+/* محاذاة الرقم لليمين (بداية السطر في RTL) مع بقاء اتجاهه LTR */
+.footer-copy-btn__value,
+.footer-reg__num,
+.footer-iban .iban-block__value{
+  display:block;
+  text-align:right;
+}
+
 .footer-location{
   display:flex;align-items:center;justify-content:center;gap:10px;
   padding:14px 20px;margin-bottom:28px;
