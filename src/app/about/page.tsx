@@ -256,7 +256,7 @@ export default function AboutPage() {
                 <i className="fa-solid fa-eye"></i>
               </div>
               <h3>رؤيتنا</h3>
-              <p>الريادة in العناية بالمساجد وتحقيق أعلى معايير الجودة والجمال في إعمار بيوت الله.</p>
+              <p>الريادة و العناية بالمساجد وتحقيق أعلى معايير الجودة والجمال في إعمار بيوت الله.</p>
             </div>
 
             <div className={`vision-card animate-on-scroll ${animateElements.includes('mission') ? 'animate' : ''}`} data-id="mission">
