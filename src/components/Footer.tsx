@@ -91,8 +91,11 @@ function CopyButton({
   );
 }
 
+/** عزل النص (رقم / إيميل) ليظهر LTR صحيح داخل سياق عربي */
+const isolateLtr = (value: string): string => `\u2066${value}\u2069`;
+
 export default function Footer() {
-  const phoneDisplay = ar('053 650 2143');
+  const phoneDisplay = isolateLtr(ar('053 650 2143'));
   const [copiedLicense, setCopiedLicense] = useState(false);
   const [copiedUnified, setCopiedUnified] = useState(false);
 
